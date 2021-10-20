@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to the Covid-Policy-Modelling GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/covid-policy-modelling/covid-policy-modelling.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
