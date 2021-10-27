@@ -8,7 +8,7 @@ The system provides a framework that allows different epidemiological codes to b
 
 The original intent was for *Policy Makers* and/or non-expert users, as shown in the diagram below,  to be the main consumers of the system to try out different scenarios and interventions, e.g. lock-downs, school closures, etc to explore the outcomes of different policy decisions.
 
-<p allign="center">
+<p align="center">
 ![System Context](Diagrams/generated/context.png) 
 </p>
 
