@@ -4,7 +4,7 @@ This project is a collaboration between the University of Edinburgh and Microsof
 
 The system provides a framework that allows different epidemiological codes to be run at the same time with the same initial conditions,  the same interventions, the same geographical region where these are supported by the models and for the results produced to be compared with each other as well as real empirical data derived for the region being modelled.
 
-To do this there are the main components are:
+To do this the main components are:
 
 * **Web Interface** (available in the [web-ui](https://github.com/covid-policy-modelling/web-ui) repository) - this is the main access point available which allows for simulations to be scheduled and once these are run to display the results.
 * The **Web Interface** will trigger the **Action Runner** (available in the [action-runner](https://github.com/covid-policy-modelling/actions-runner) repository), using GitHub actions, which will deploy a **Model Runner** via a docker engine.
