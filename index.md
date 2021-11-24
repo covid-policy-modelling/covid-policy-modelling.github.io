@@ -16,7 +16,7 @@ This is achieved through a framework for adapting the inputs and outputs of diff
 The tool was originally intended for *Policy Makers* and/or non-expert users, as shown in the diagram below, to be the main consumers of the tool to try out different scenarios and interventions, e.g. lock-downs, school closures, etc to explore the outcomes of different policy decisions.
 As a general framework for running models, it is also useful for *Modellers* who want to make use of scalable cloud resources to run simulations, or to compare their models against the work of others.
 
-![System Context](diagrams/generated/context.png)
+![System Context](assets/diagrams/context.png)
 
 ## About the models
 
