@@ -1,0 +1,26 @@
+
+@startuml
+!include <c4/C4_Container.puml>
+
+'ref http://plantuml.com/stdlib
+
+LAYOUT_WITH_LEGEND()
+
+title Covid Modelling Container
+
+Person_Ext(policy_maker, "Policy Maker" , "A non-expert user" )
+
+System_Boundary(covid_modelling, "Covid Modelling") {
+  Container(ui, "Web Interface", "Azure", "Allows policy makers to schedule simulations and compare what different models predict")
+  ContainerDb(queue, "Job Queue", "GitHub")
+  Container(model_runner, "Model Runner", "GitHub, Azure", "Interprets parameters and executes simulations")
+}
+
+System_Ext(models, "Models", "COVID-19 model codes")
+
+Rel(policy_maker, ui, "Sets up simulation")
+Rel(ui, queue, "Schedules simulation")
+Rel(model_runner, queue, "Fetches simulations")
+Rel(model_runner, ui, "Updates simulation results")
+Rel(model_runner, models, "Uses")
+@enduml

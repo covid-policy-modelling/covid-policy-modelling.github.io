@@ -1,0 +1,25 @@
+
+@startuml
+!include <c4/C4_Component.puml>
+
+'ref http://plantuml.com/stdlib
+
+LAYOUT_WITH_LEGEND()
+
+title Covid Modelling Job Queue Components
+
+Container(ui, "Web Interface", "Azure", "Allows policy makers to schedule simulations and compare what different models predict")
+Container_Boundary(queue, "Job Queue") {
+  Component_Ext(api, "GitHub API", "GitHub: REST", "External API to integrate with GitHub")
+  Component_Ext(actions, "Event Handler", "GitHub: Actions", "External system to automate workflows")
+  Component(workflows, "Workflow Definitions", "GitHub: YAML", "Defines GitHub Actions workflows")
+  Component_Ext(job_queue, "Queue", "GitHub: Actions", "External system containing workflows/runs")
+}
+Container(model_runner, "Model Runner", "GitHub, Azure", "Interprets parameters and executes simulations")
+
+Rel_Right(ui, api, "Schedules simulation (dispatch event)")
+Rel(api, actions, "Passes dispatch events")
+Rel(actions, workflows, "Fetches workflow definition")
+Rel(actions, job_queue, "Schedules jobs")
+Rel_Up(model_runner, job_queue, "Fetches jobs")
+@enduml
