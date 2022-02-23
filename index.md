@@ -3,17 +3,16 @@
 The COVID Policy Modelling Tool allows different codes that model the COVID-19 pandemic to be run on the same geographical regions with the same initial conditions and interventions, and to compare the model output results with each other as well as to real data.
 This is achieved through a framework for adapting the inputs and outputs of different models to a common schema, and for running the models on scalable cloud resources.
 
-### Creating simulations
+### Screenshots
 
+{:class="columns"}
 [![Simulation Creation](assets/images/thumbnail_creation.png)](assets/images/screenshot_creation.png)
-
-### Simulation output
-
 [![Simulation Output](assets/images/thumbnail_output.png)](assets/images/screenshot_output.png)
 
 ## Who is the tool for?
 
-The tool was originally intended for *Policy Makers* and/or non-expert users, as shown in the diagram below, to be the main consumers of the tool to try out different scenarios and interventions, e.g. lock-downs, school closures, etc to explore the outcomes of different policy decisions.
+The tool was originally intended for *Policy Makers* and/or non-expert users, as shown in the diagram below, to be the main consumers of the tool.
+It allows them to try out different scenarios and interventions, e.g. lock-downs, school closures, etc. to explore the outcomes of different policy decisions.
 As a general framework for running models, it is also useful for *Modellers* who want to make use of scalable cloud resources to run simulations, or to compare their models against the work of others.
 
 ![System Landscape](assets/diagrams/structurizr-SystemLandscapeSummary.png)

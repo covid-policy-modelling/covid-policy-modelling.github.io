@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.columns > * {
+  flex: 1 0 20em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
