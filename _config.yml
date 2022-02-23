@@ -18,9 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: The COVID Policy Modelling Tool
+title: COVID-UI
 description: >- # this means to ignore newlines until "baseurl:"
-  Covid policy modelling web pages
+  A framework allowing different codes that model the COVID-19 pandemic to be run on the same geographical regions with the same conditions and interventions.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://covid-policy-modelling.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 markdown: kramdown
@@ -29,6 +29,7 @@ markdown: kramdown
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-feed
+  - jekyll-github-metadata
   - jekyll-remote-theme
 
 # Exclude from processing.

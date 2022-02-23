@@ -1,6 +1,6 @@
-# The COVID Policy Modelling Tool
+# COVID-UI
 
-The COVID Policy Modelling Tool allows different codes that model the COVID-19 pandemic to be run on the same geographical regions with the same initial conditions and interventions, and to compare the model output results with each other as well as to real data.
+COVID-UI allows different codes that model the COVID-19 pandemic to be run on the same geographical regions with the same initial conditions and interventions, and to compare the model output results with each other as well as to real data.
 This is achieved through a framework for adapting the inputs and outputs of different models to a common schema, and for running the models on scalable cloud resources.
 
 ### Screenshots
