@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+.page-header {
+  padding: 2rem 1rem;
+}
+
 .columns {
   display: flex;
   justify-content: space-between;
