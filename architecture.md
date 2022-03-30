@@ -40,8 +40,8 @@ Relevant repositories:
 
 * [model-runner](https://github.com/covid-policy-modelling/model-runner)
 * [model-connector-template](https://github.com/covid-policy-modelling/model-connector-template) - Note that this is a template. Specific models each have their own **Model Connector**.
-* [JSON input and output schema used for communication between web interface and model-connectors](https://github.com/covid-policy-modelling/model-runner/tree/main/packages/api/schema)
-* [action-runner](https://github.com/covid-policy-modelling/actions-runner)
+* [JSON input and output schema used for communication between web interface and model-connectors](https://github.com/covid-policy-modelling/schemas/tree/main/schema)
+* [actions-runner](https://github.com/covid-policy-modelling/actions-runner)
 
 ## Control Plane
 
