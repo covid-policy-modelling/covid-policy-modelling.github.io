@@ -7,7 +7,7 @@
 The main systems are:
 
 * **Web Interface** - this is the main access point available which allows for simulations to be scheduled and once these are run to display the results.
-* **Model Runner** - this spawns Docker containers to run the simulations. Once these are complete it will communicate the results back to the **Web interface**.
+* **Job Runner** - this spawns Docker containers to run the simulations. Once these are complete it will communicate the results back to the **Web interface**.
 
 ## GitHub
 
@@ -26,7 +26,7 @@ Relevant repositories:
 
 * [web-ui](https://github.com/covid-policy-modelling/web-ui)
 
-## Model Runner
+## Job Runner
 
 The **Web Interface** will use GitHub Actions to request a simulation, which is executed by a **Model Runner** Docker container.
 The **Model Runner** will spawn an additional model-specific **Model Connector** Docker container to run the simulation. Once this are complete it will communicate the results back to the **Web interface**.
@@ -34,7 +34,7 @@ The **Model Connector** is used to translate between the input and output schema
 
 This is managed using [actions-runner-controller](https://github.com/actions-runner-controller/actions-runner-controller) - the **Actions Runner** and **Actions Runner Controller** containers below are part of this tool.
 
-![Model Runner](assets/diagrams/structurizr-ModelRunner-Container.png)
+![Job Runner](assets/diagrams/structurizr-JobRunner-Container.png)
 
 Relevant repositories:
 

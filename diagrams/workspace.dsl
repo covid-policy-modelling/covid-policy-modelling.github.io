@@ -29,7 +29,7 @@ workspace {
                     -> webApi "Uses"
                 }
             }
-            modelRunner = softwareSystem "Model Runner" "Interprets parameters and executes simulations" {
+            jobRunner = softwareSystem "Job Runner" "Interprets parameters and executes simulations" {
                 modelConnector = container "Model Connector" "Converts parameters to model-specific parameters and executes simulation" {
                     -> models "Uses"
                 }
@@ -119,7 +119,7 @@ workspace {
             include *
             exclude "element.tag==Summary"
         }
-        container modelRunner {
+        container jobRunner {
             include *
             exclude "element.tag==Summary"
         }
