@@ -64,3 +64,10 @@ In particular, the number, size and configuration of node pools for the Azure Ku
 Relevant repositories:
 
 * [infrastructure-template](https://github.com/covid-policy-modelling/infrastructure-template) - Note that this is a template, demonstrating how infrastructure can be managed with Terraform. Each organisation will need to manage their own deployment environment, and may wish to use, adapt or ignore this configuration. We are aiming to make this repository open-source, but cannot do so at present. If you wish to gain access, please contact the [maintainers via GitHub](https://github.com/orgs/covid-policy-modelling/people).
+
+## Communication
+
+When a user requests a simulation through the web-ui, this triggers a sequence of events involving most of the components of the system.
+The order of events is shown in the following diagram:
+
+![Simulation](assets/diagrams/structurizr-simulation.png)

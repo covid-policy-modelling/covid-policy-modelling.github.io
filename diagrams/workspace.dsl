@@ -130,5 +130,25 @@ workspace {
         deployment * production {
             include *
         }
+        dynamic jobRunner simulation {
+            policyMaker -> webUi "Sets up simulation"
+            webUi -> webApi "Uses"
+            webApi -> database "Records simulation details"
+            webApi -> githubApi "Schedules simulation"
+            githubApi -> githubActions "Triggers event"
+            actionsRunnerController -> githubActions "Fetches simulation jobs"
+            githubActions -> controlPlane "Fetches workflow definition"
+            actionsRunnerController -> actionsRunner "Creates"
+            actionsRunner -> modelRunnerC "Creates"
+            modelRunnerC -> githubPackages "Fetches model containers"
+            modelRunnerC -> modelConnector "Executes"
+            modelRunnerC -> blobStore "Updates simulation outputs"
+            modelRunnerC -> webApi "Updates simulations details"
+            webApi -> database "Updates simulation details"
+            policyMaker -> webUi "Views simulation results"
+            webUi -> webApi "Uses"
+            webApi -> database "Queries simulation details"
+            webApi -> blobStore "Downloads simulation results"
+        }
     }
 }
