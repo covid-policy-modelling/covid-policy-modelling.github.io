@@ -75,3 +75,8 @@ A summary of the communication is shown in the below diagram:
 The below diagram shows the same communication in more detail:
 
 ![Simulation](assets/diagrams/structurizr-simulationDetail.png)
+
+This may be seen more clearly in the following sequence diagram:
+
+![Simulation](assets/diagrams/structurizr-simulationDetail-sequence.png)
+
