@@ -68,6 +68,10 @@ Relevant repositories:
 ## Communication
 
 When a user requests a simulation through the web-ui, this triggers a sequence of events involving most of the components of the system.
-The order of events is shown in the following diagram:
+A summary of the communication is shown in the below diagram:
 
-![Simulation](assets/diagrams/structurizr-simulation.png)
+![Simulation](assets/diagrams/structurizr-simulationSummary.png)
+
+The below diagram shows the same communication in more detail:
+
+![Simulation](assets/diagrams/structurizr-simulationDetail.png)

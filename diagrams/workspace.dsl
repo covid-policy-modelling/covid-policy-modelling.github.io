@@ -9,9 +9,7 @@ workspace {
             githubApi = softwareSystem "GitHub API" "Communication with GitHub Actions" "Detail" {
                 -> githubActions "Triggers event"
             }
-            githubPackages = softwareSystem "GitHub Packages / Container Registry" "Stores model code" "Detail" {
-                -> models "Incorporates"
-            }
+            githubPackages = softwareSystem "GitHub Packages / Container Registry" "Stores model connectors" "Detail"
         }
 
         enterprise "Covid Policy Modelling" {
@@ -35,17 +33,20 @@ workspace {
                 }
                 modelRunnerC = container "Model Runner" "Spawns other containers to execute simulation" {
                     -> githubPackages "Fetches model containers"
-                    -> modelConnector "Executes"
+                    -> modelConnector "Creates"
                     -> blobStore "Updates simulation outputs"
                     -> webApi "Updates simulations details"
                 }
                 actionsRunner = container "Actions Runner" "Executes jobs from GitHub Actions" {
-                    -> modelRunnerC "Creates"
-                }
-                actionsRunnerController = container "Actions Runner Controller" "Fetches jobs from GitHub Actions" {
-                    -> actionsRunner "Creates"
                     -> github "Fetches simulation jobs"
                     -> githubActions "Fetches simulation jobs"
+                    -> modelRunnerC "Creates"
+                }
+                actionsRunnerController = container "Actions Runner Controller" "Manages Actions Runners" {
+                    -> actionsRunner "Creates"
+                }
+                actionsRunnerWebhook = container "Actions Runner Webhook" "Responds to job notifications" {
+                    -> actionsRunnerController "Notifies of new job"
                 }
             }
             controlPlane = softwareSystem "Control Plane" {
@@ -53,6 +54,7 @@ workspace {
             }
             github -> controlPlane "Fetches workflow definition"
             githubActions -> controlPlane "Fetches workflow definition"
+            githubActions -> actionsRunnerWebhook "Notifies of new job"
         }
 
         policyMaker = person "Policy Maker" "A non-expert user" {
@@ -79,6 +81,7 @@ workspace {
                     deploymentNode "Default Node Pool" {
                         deploymentNode "Node (x1)" {
                             deploymentNode "pod (x1)" {
+                                containerInstance actionsRunnerWebhook
                                 containerInstance actionsRunnerController
                             }
                         }
@@ -110,6 +113,8 @@ workspace {
         systemLandscape {
             include *
             exclude "element.tag==Summary"
+            exclude githubActions -> jobRunner
+            exclude researcher
         }
         systemLandscape SystemLandscapeSummary {
             include *
@@ -130,25 +135,38 @@ workspace {
         deployment * production {
             include *
         }
-        dynamic jobRunner simulation {
+        dynamic * simulationSummary {
+            title "Simulation Execution Summary"
+            policyMaker -> webInterface "Sets up simulation"
+            webInterface -> webInterface "Records simulation details"
+            webInterface -> github "Schedules simulation"
+            github -> controlPlane "Fetches workflow definition"
+            github -> jobRunner "Notifies of new job"
+            jobRunner -> github "Fetches simulation jobs"
+            jobRunner -> webInterface "Updates simulations details"
+            jobRunner -> github "Fetches model containers"
+            jobRunner -> jobRunner "Executes model containers"
+            jobRunner -> webInterface "Updates simulation details and outputs"
+        }
+        dynamic jobRunner simulationDetail {
+            title "Simulation Execution Detail"
             policyMaker -> webUi "Sets up simulation"
             webUi -> webApi "Uses"
             webApi -> database "Records simulation details"
             webApi -> githubApi "Schedules simulation"
             githubApi -> githubActions "Triggers event"
-            actionsRunnerController -> githubActions "Fetches simulation jobs"
             githubActions -> controlPlane "Fetches workflow definition"
+            githubActions -> actionsRunnerWebhook "Notifies of new job"
+            actionsRunnerWebhook -> actionsRunnerController "Notifies of new job"
             actionsRunnerController -> actionsRunner "Creates"
+            actionsRunner -> githubActions "Fetches simulation jobs"
             actionsRunner -> modelRunnerC "Creates"
+            modelRunnerC -> webApi "Updates simulations details"
             modelRunnerC -> githubPackages "Fetches model containers"
-            modelRunnerC -> modelConnector "Executes"
+            modelRunnerC -> modelConnector "Creates"
             modelRunnerC -> blobStore "Updates simulation outputs"
             modelRunnerC -> webApi "Updates simulations details"
             webApi -> database "Updates simulation details"
-            policyMaker -> webUi "Views simulation results"
-            webUi -> webApi "Uses"
-            webApi -> database "Queries simulation details"
-            webApi -> blobStore "Downloads simulation results"
         }
     }
 }

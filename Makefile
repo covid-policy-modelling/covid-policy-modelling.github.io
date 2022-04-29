@@ -2,7 +2,7 @@ SRC_DIR=diagrams
 BUILD_DIR=assets/diagrams
 
 .PHONY : all
-all : $(addprefix $(BUILD_DIR)/structurizr-, SystemLandscape.png SystemLandscapeSummary.png ControlPlane-SystemContext.png JobRunner-Container.png WebInterface-Container.png Production-Deployment.png simulation.png)
+all : $(addprefix $(BUILD_DIR)/structurizr-, SystemLandscape.png SystemLandscapeSummary.png ControlPlane-SystemContext.png JobRunner-Container.png WebInterface-Container.png Production-Deployment.png simulationSummary.png simulationDetail.png)
 
 $(SRC_DIR)/%.puml : $(SRC_DIR)/workspace.dsl
 	docker run -it --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml/c4plantuml
