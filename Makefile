@@ -5,10 +5,10 @@ BUILD_DIR=assets/diagrams
 all : $(addprefix $(BUILD_DIR)/structurizr-, SystemLandscape.png SystemLandscapeSummary.png ControlPlane-SystemContext.png JobRunner-Container.png WebInterface-Container.png Production-Deployment.png simulationSummary.png simulationDetail.png simulationDetail-sequence.png)
 
 $(SRC_DIR)/structurizr-simulationDetail-sequence.puml : $(SRC_DIR)/workspace.dsl
-	docker run -it --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml
+	docker run --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml
 
 $(SRC_DIR)/%.puml : $(SRC_DIR)/workspace.dsl
-	docker run -it --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml/c4plantuml
+	docker run --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml/c4plantuml
 
 $(BUILD_DIR)/%.png : $(SRC_DIR)/%.puml
 	plantuml -o $(abspath $(BUILD_DIR)) $<
