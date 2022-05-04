@@ -11,7 +11,7 @@ $(SRC_DIR)/%.puml : $(SRC_DIR)/workspace.dsl
 	docker run --rm -v $(abspath $(dir $<)):/usr/local/structurizr structurizr/cli export -workspace $(notdir $<) -format plantuml/c4plantuml
 
 $(BUILD_DIR)/%.png : $(SRC_DIR)/%.puml
-	plantuml -o $(abspath $(BUILD_DIR)) $<
+	docker run --rm -v $(abspath $(BUILD_DIR)):/output -v $(abspath $(dir $<)):/input dstockhammer/plantuml:1.2022.4 -o /output /input/$(notdir $<)
 
 .PHONY : clean
 clean :
