@@ -80,15 +80,17 @@ workspace {
                 deploymentNode "Azure Kubernetes Service" {
                     deploymentNode "Default Node Pool" {
                         deploymentNode "Node (x1)" {
-                            deploymentNode "pod (x1)" {
+                            deploymentNode "pod a (x1)" {
                                 containerInstance actionsRunnerWebhook
+                            }
+                            deploymentNode "pod b (x1)" {
                                 containerInstance actionsRunnerController
                             }
                         }
                     }
                     deploymentNode "Standard Node Pool" {
                         deploymentNode "Node (x0-6)" {
-                            deploymentNode "pod (x0-18)" {
+                            deploymentNode "pod c (x0-18)" {
                                 containerInstance actionsRunner
                                 containerInstance modelRunnerC
                                 containerInstance modelConnector
