@@ -88,6 +88,13 @@ For example, if your GitHub username was `octocat`, then an instruction to enter
     curl https://raw.githubusercontent.com/covid-policy-modelling/schemas/main/schema/output-minimal.json -o output-schema.json
     ```
 
+1. Obtain a copy of the SIR model and associated requirements:
+
+    ```bash
+    curl https://covid-policy-modelling.github.io/connector-tutorial/model.py -o model.py
+    curl https://covid-policy-modelling.github.io/connector-tutorial/requirements.txt -o requirements.txt
+    ```
+
 1. Create a file called `connector.py`:
 
     ```bash
@@ -131,12 +138,12 @@ For example, if your GitHub username was `octocat`, then an instruction to enter
 
     logging.info('Executing simulation')
     model_output = {
-        'metadata': model_input,
-        'model': model_description,
         'outputs': [],
         't': [],
         'u': [],
     }
+    model_output['metadata'] = model_input
+    model_output['model'] = model_description
     logging.debug(f'Simulation result: {model_output}')
 
     jsonschema.validate(model_output, model_output_schema)
@@ -146,18 +153,6 @@ For example, if your GitHub username was `octocat`, then an instruction to enter
         json.dump(model_output, f, indent='  ')
 
     logging.info(f'Simulation successfully completed')
-    ```
-
-1. Create a file called `requirements.txt`:
-
-    ```bash
-    touch requirements.txt
-    ```
-
-1. Using your text editor, edit the file `requirements.txt` to contain the following:
-
-    ```
-    jsonschema==4.7.2
     ```
 
 1. Using your text editor, edit the file `Dockerfile` to contain the following:
@@ -196,80 +191,7 @@ For example, if your GitHub username was `octocat`, then an instruction to enter
 
 1. You've now successfully created a model connector.
    You might have noticed however that the model didn't actually do any simulation.
-   Create a file called `model.py`:
-
-    ```bash
-    touch model.py
-    ```
-
-1. Using your text editor, edit the file `model.py` to contain the following:
-
-    ```python
-    #! /usr/bin/env python3
-    import numpy as np
-    from scipy.integrate import solve_ivp
-    from scipy.interpolate import InterpolatedUnivariateSpline
-
-    # Model definition
-    def model(t, u, p):
-        b,g = p
-        S,I,R = u
-        dS = -b*S*I
-        dI = b*S*I-g*I
-        dR = g*I
-        return [dS,dI,dR]
-
-    # Stop integration at steady state
-    # See https://scicomp.stackexchange.com/questions/16325/dynamically-ending-ode-integration-in-scipy
-    def steady_state(t,u,p,f,tol):
-        global flag
-        du = f(t,u,p)
-        condition = np.max(np.abs(du))<tol
-        if flag == 1:
-            if condition:
-                test = [0]
-            else:
-                test = [1]
-            flag = 0
-        else:
-            if condition:
-                test = np.array([0])
-            else:
-                test = np.array([1])
-        return test
-
-    def simulate(tspan, u0, p):
-        # Define terminal condition and type-change flag
-        tol = 1e-6
-        limit = lambda t, u: steady_state(t,u,p,model,tol)
-        limit.terminal = True
-        global flag
-
-        flag = 1
-
-        # Run model
-        sol = solve_ivp(lambda t, u: model(t, u, p),
-                        tspan,
-                        u0,
-                        events = limit)
-
-        # Generate outputs
-        ## Final size
-        fs = sol.y[2,-1]
-        ## Peak infected and peak time
-        f = InterpolatedUnivariateSpline(sol.t, sol.y[1,:], k=4)
-        cr_pts = f.derivative().roots()
-        cr_pts = np.append(cr_pts, (sol.t[0], sol.t[-1]))  # also check the endpoints of the interval
-        cr_vals = f(cr_pts)
-        max_index = np.argmax(cr_vals)
-        pk = cr_vals[max_index]
-        pkt = cr_pts[max_index]
-
-        # Extract outputs
-        return {"t": sol.t.tolist(), "u": sol.y.tolist(), "outputs":[fs, pk, pkt]}
-    ```
-
-1. Using your text editor, edit the file `connector.py` to change the following:
+   Using your text editor, edit the file `connector.py` to change the following:
 
     ```python
     #! /usr/bin/env python3
@@ -289,14 +211,29 @@ For example, if your GitHub username was `octocat`, then an instruction to enter
     ...
     ```
 
-1. Using your text editor, edit the file `requirements.txt` to add the following:
-
-    ```
-    scipy==1.8.1
-    ```
-
 1. Build your image by running `docker-compose build run-model`.
 
 1. Test your connector code by running `docker-compose run run-model`.
 
+1. View the output with:
+
+    ```bash
+    cat output/data.json
+    ```
+
 1. Validate the output of your connector by running `docker-compose run --rm validate`.
+
+1. Using your text editor, edit the file `test-job.json` to change some of the parameters, e.g.:
+
+    ```json
+    {"p": [0.55, 0.15], "u0": [0.98, 0.01, 0.0], "tspan": [0.0, 10000.0]}
+    ```
+
+1. Run the model again with `docker-compose run run-model`.
+
+1. View the output with:
+
+    ```bash
+    cat output/data.json
+    ```
+
