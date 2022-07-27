@@ -140,7 +140,7 @@ This is indicated with an ellipsis: `...`.
 1. Next, test your connector code, which should result in an error:
 
    ```bash
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    python3: can't open file '/app/connector.py': [Errno 2] No such file or directory
    ERROR: 2
@@ -176,7 +176,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    ```
@@ -224,7 +224,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation results: {'outputs': [], 't', 'u': []}
@@ -281,7 +281,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation results: {'outputs': [], 't', 'u': []}
@@ -370,7 +370,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation input: {'region': 'US', 'subregion': 'US-WY', 'parameters': {'r0': None, 'calibrationDate': '2020-04-18', 'calibrationCaseCount': 1400, 'calibrationDeathCount': 200, 'interventionPeriods': [{'startDate': '2020-03-15', 'reductionPopulationContact': 15, 'socialDistancing': 'moderate'}, {'startDate': '2020-03-21', 'reductionPopulationContact': 65, 'socialDistancing': 'moderate', 'schoolClosure': 'aggressive'}, {'startDate': '2020-03-25', 'reductionPopulationContact': 90, 'socialDistancing': 'aggressive', 'schoolClosure': 'aggressive'}, {'startDate': '2020-05-01', 'reductionPopulationContact': 50, 'socialDistancing': 'moderate', 'schoolClosure': 'mild'}, {'startDate': '2020-06-01', 'reductionPopulationContact': 0}]}}
@@ -395,7 +395,7 @@ This is indicated with an ellipsis: `...`.
 1. Run the model again (note that since you only changed the test data, you don't need to build it again):
 
    ```bash
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation input: {'p': [0.25, 0.25], 'u0': [0.99, 0.01, 0.0], 'tspan': [0.0, 10000.0]}
@@ -445,7 +445,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation input: {'p': [0.25, 0.25], 'u0': [0.99, 0.01, 0.0], 'tspan': [0.0, 10000.0]}
@@ -480,7 +480,7 @@ This is indicated with an ellipsis: `...`.
    ```bash
    $ docker-compose build run-model
    Successfully tagged tutorial-model-connector_run-model:latest
-   $ docker-compose run run-model
+   $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
    DEBUG:root:Simulation input: {'p': [0.25, 0.25], 'u0': [0.99, 0.01, 0.0], 'tspan': [0.0, 10000.0]}
