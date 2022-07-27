@@ -159,9 +159,16 @@ This is indicated with an ellipsis: `...`.
    ```python
    #! /usr/bin/env python3
    import logging
+   import os
    import sys
 
    logging.basicConfig(level=logging.DEBUG)
+
+   model_description = {
+       "name": "model-connector-tutorial",
+       "modelVersion": os.getenv("CONNECTOR_VERSION"),
+       "connectorVersion": os.getenv("CONNECTOR_VERSION"),
+   }
 
    model_input_fn = sys.argv[1]
    model_output_fn = sys.argv[2]
@@ -198,6 +205,7 @@ This is indicated with an ellipsis: `...`.
    ```python
    #! /usr/bin/env python3
    import logging
+   import os
    import sys
    import json
 
@@ -210,6 +218,7 @@ This is indicated with an ellipsis: `...`.
        't': [],
        'u': [],
    }
+   model_output['model'] = model_description
    logging.debug(f'Simulation result: {model_output}')
 
    # Save outputs
@@ -257,6 +266,7 @@ This is indicated with an ellipsis: `...`.
    ```python
    #! /usr/bin/env python3
    import logging
+   import os
    import sys
    import json
    import jsonschema
@@ -341,6 +351,7 @@ This is indicated with an ellipsis: `...`.
    ```python
    #! /usr/bin/env python3
    import logging
+   import os
    import sys
    import json
    import jsonschema
@@ -360,6 +371,7 @@ This is indicated with an ellipsis: `...`.
    ...
 
    model_output['metadata'] = model_input
+   model_output['model'] = model_description
    logging.debug(f'Simulation result: {model_output}')
 
    ...
@@ -395,56 +407,6 @@ This is indicated with an ellipsis: `...`.
 1. Run the model again (note that since you only changed the test data, you don't need to build it again):
 
    ```bash
-   $ docker-compose run --rm run-model
-   Creating tutorial-model-connector_run-model_run ... done
-   INFO:root:Starting connector
-   DEBUG:root:Simulation input: {'p': [0.25, 0.25], 'u0': [0.99, 0.01, 0.0], 'tspan': [0.0, 10000.0]}
-   DEBUG:root:Simulation results: {'outputs': [], 't': [], 'u': [], 'metadata': {'p': [0.25, 0.25], 'u0': [0.99, 0.01, 0.0], 'tspan': [0.0, 10000.0]}}
-   Traceback (most recent call last):
-     File "/app/connector.py", line 35, in <module>
-       jsonschema.validate(model_output, model_output_schema)
-     File "/usr/local/lib/python3.9/site-packages/jsonschema/validators.py", line 1059, in validate
-       raise error
-   jsonschema.exceptions.ValidationError: 'model' is a required property
-
-   ...
-   ```
-
-# Adding model description
-
-1. This time, the input is valid, but there's one last problem with the output.
-   The output needs to contain a `model` key, which gives information on the model used to produce the numbers.
-   Using your text editor, edit the file `connector.py` again to contain the following:
-
-   ```python
-   #! /usr/bin/env python3
-   import logging
-   import sys
-   import json
-   import jsonschema
-   import os
-
-   model_description = {
-       "name": "model-connector-tutorial",
-       "modelVersion": os.getenv("CONNECTOR_VERSION"),
-       "connectorVersion": os.getenv("CONNECTOR_VERSION"),
-   }
-
-   logging.info('Starting connector')
-
-   ...
-
-   model_output['model'] = model_description
-   logging.debug(f'Simulation result: {model_output}')
-
-   ...
-   ```
-
-1. Build and run the model again:
-
-   ```bash
-   $ docker-compose build run-model
-   Successfully tagged tutorial-model-connector_run-model:latest
    $ docker-compose run --rm run-model
    Creating tutorial-model-connector_run-model_run ... done
    INFO:root:Starting connector
