@@ -453,5 +453,53 @@ This is indicated with an ellipsis: `...`.
    You can view it by running:
 
    ```bash
-   cat output/data.json
+   $ cat output/data.json
    ```
+
+# Publishing your connector
+
+1. In order to publish your connector, you need to push your code to your remote GitHub repository.
+   Note that while we use the term publish, the connector is still private and nobody else will be able to see it.
+
+   ```bash
+   $ git add .
+   $ git commit -m "Add initial connector"
+   $ git push
+   ```
+
+1. In your browser, go to the URL: https://github.com/<USERNAME>/tutorial-model-connector.
+   You should see your latest code listed.
+
+1. Click the "Actions" tab.
+   Listed on the page, you should see a line that says "Add initial connector", next to either a yellow circle, a green circle with a tick or a red circle with a cross.
+
+   * If the circle is yellow, your connector is being built, and you should wait until it changes to red or green, which should take a minute or two.
+   * If the circle is red, something has went wrong. Click on "Add initial connector", then "publish", and you should be shown an error. Try to figure out what has went wrong, fix the code, then commit and push again.
+   * If the circle is green, your connector has been built successfully.
+
+1. Click the "Code" tab.
+   Under the "Packages" heading, you should now see your connector listed as "tutorial-model-connector/tutorial-model-connector".
+
+1. Test you can access your package now.
+   You may be asked for your GitHub username and password during the first command.
+
+   ```bash
+   $ docker login ghcr.io
+   ...
+   $ docker pull ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector
+   ...
+   Using default tag: latest
+   latest: Pulling from <USERNAME/tutorial-model-connector/tutorial-model-connector
+   ...
+   Status: Downloaded newer image for ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector:latest
+   ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector:latest
+   ```
+
+# Notes
+
+For reference, the completed files referred to in this tutorial are:
+
+* [connector.py](connector.py)
+* [Dockerfile](Dockerfile)
+* [model.py](model.py)
+* [requirements.txt](requirements.txt)
