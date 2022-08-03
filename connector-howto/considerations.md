@@ -31,8 +31,8 @@ As above, this is straight-forward, and has the added benefit of simplifying the
 
 #### As a library, e.g. on PyPi or CRAN
 
-This is also straight-forward, and usually simpler than integration with a model installed as a separate application.
-However, under most circumstances it means that the connector should be written in the same language as the model.
+This is also straight-forward, and if the connector is written in the same language as the model then this is usually the simplest approach.
+It is still possible to write the connector in a different language, making use of bindings (e.g. using [ctypes](https://docs.python.org/3/library/ctypes.html?highlight=ctypes#module-ctypes) or [CFFI](https://cffi.readthedocs.io/en/latest/goals.html) in Python), but this is more complex.
 
 ### Where will the connector be developed?
 
@@ -54,7 +54,6 @@ If you intend to use an environment not managed by your own organisation, make s
 
 Connectors can in theory be written in any language.
 The principal requirements are that the language can parse and output JSON, and execute the model.
-It's also recommended that you pick a language with a [JSON Schema validator](https://json-schema.org/implementations.html#validators).
 
 We also recommend that you avoid languages with licensing requirements, e.g. MATLAB or Mathematica, as this complicates the deployment.
 If you do want to use such a language, please communicate with the maintainers of the relevant COVID-UI environment to discuss how this can be managed.
@@ -115,6 +114,15 @@ The steps for this are mostly similar to using the `CommonModelInput` and `Commo
 Normally, each connector supports exactly one input schema and one output schema.
 If there is a use case for a connector that supports more than one, this could be achieved by alterations to the metadata which define which connectors are deployed.
 Please communicate this with the maintainers of the relevant COVID-UI environment for more advice.
+
+### Will you validate the input and output?
+
+While your connector *should* always received data that is valid according to your input schema, we strongly recommend that you always validate the input yourself as the first step of your connector.
+This makes debugging any unexpected issues much easier, and is also very helpful when initially developing or updating the connector.
+For similar reasons, we also recommend you validate any output before returning it.
+
+JSON Schema validators are available for many languages, and the JSON Schema team maintain a [non-exhaustive list of validators](https://json-schema.org/implementations.html#validators).
+You may wish to consider using a different language if a validator is not available for your chosen language.
 
 ### What data is needed for the model, and how will it be obtained?
 

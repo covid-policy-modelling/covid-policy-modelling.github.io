@@ -63,17 +63,16 @@ Very short commands may be shown inline in a different font, like this: `cat fil
 In both the output of the commands and while showing repeated file content, some content may be omitted.
 This is indicated with an ellipsis: `...`.
 
-# Creating your repository
+## Creating your repository
 
 1. In your browser, visit [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
 
 1. Click on "Use this template".
 
-1. For "Owner", check that your username is selected.
-
-1. For "Repository name", enter "tutorial-model-connector".
-
-1. Select "Private".
+1. Fill out the repository details:
+    * For "Owner", check that your username is selected.
+    * For "Repository name", enter "tutorial-model-connector".
+    * Select "Private".
 
 1. Click on "Create repository from template".
 
@@ -106,7 +105,7 @@ This is indicated with an ellipsis: `...`.
     $ curl https://covid-policy-modelling.github.io/connector-tutorial/requirements.txt -o requirements.txt
     ```
 
-# Creating a Dockerfile
+## Creating a Dockerfile
 
 1. The first requirement of a model connector is that it must be a Docker image.
    To build the image, you will need to create a `Dockerfile`.
@@ -146,7 +145,7 @@ This is indicated with an ellipsis: `...`.
    ERROR: 2
    ```
 
-# Creating your connector
+## Creating your connector
 
 1. The previous error comes from trying to run the command specified in the Dockerfile with `CMD`, because the `connector.py` doesn't exist yet. Create that now:
 
@@ -188,7 +187,7 @@ This is indicated with an ellipsis: `...`.
    INFO:root:Starting connector
    ```
 
-# Validating the output
+## Validating the output
 
 1. The connector now runs successfully, but it doesn't produce any output.
    An additional command can be used to check the output, and confirm this:
@@ -329,7 +328,7 @@ This is indicated with an ellipsis: `...`.
    ERROR: 1
    ```
 
-# Reading input data
+## Reading input data
 
 1. As expected, another error was produced.
    You might notice that the error message is not exactly the same as before.
@@ -415,7 +414,7 @@ This is indicated with an ellipsis: `...`.
    INFO:root:Simulation successfully completed
    ```
 
-# Carrying out a simulation
+## Carrying out a simulation
 
 1. You've now successfully created a model connector.
    You might have noticed however that the model didn't actually do any simulation.
@@ -456,7 +455,7 @@ This is indicated with an ellipsis: `...`.
    $ cat output/data.json
    ```
 
-# Publishing your connector
+## Publishing your connector
 
 1. In order to publish your connector, you need to push your code to your remote GitHub repository.
    Note that while we use the term publish, the connector is still private and nobody else will be able to see it.
@@ -495,7 +494,7 @@ This is indicated with an ellipsis: `...`.
    ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector:latest
    ```
 
-# Notes
+## Notes
 
 For reference, the completed files referred to in this tutorial are:
 
