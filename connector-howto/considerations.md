@@ -171,7 +171,7 @@ It does however require additional effort to develop and maintain a system for p
 
 ## Next steps
 
-Follow the [main build steps](build.md).
+Follow the [main build steps](initialise.md).
 These are appropriate if:
 
 * Either:
@@ -194,7 +194,7 @@ These are appropriate if:
 ## Other configurations
 
 The following configurations are currently unsupported - they are possible to do but we have not documented them.
-You may still be able to achieve them by amending the [main build instructions](build.md).
+You may still be able to achieve them by amending the [main build instructions](initialise.md).
 We have listed what sections of the instructions are likely to require alterations:
 
 * How to deploy to a different environment (Deploying)

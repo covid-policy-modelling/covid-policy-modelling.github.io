@@ -16,5 +16,9 @@ For more information, you should work through (or at least read) the [tutorial o
 ## Steps
 
 1. Work through the [initial considerations](considerations.md), which should guide you on what other documentation to follow.
-1. Work through the [main steps to build a connector](build.md).
+1. [Create your connector repository](initialise.md).
+1. [Build your connector](build.md).
+1. [Document your connector](document.md).
+1. [Publish your connector](publish.md).
+1. [Deploy your connector](deploy.md).
 1. Look at [examples](examples.md) if you need further guidance or inspirations.

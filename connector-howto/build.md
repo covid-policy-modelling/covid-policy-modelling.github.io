@@ -15,7 +15,6 @@ The main body of these instructions assume the following:
 * The *model* is available as a library
 * The *model* is installed from a public package repository e.g. PyPI, or CRAN.
 * The *connector* will be developed in a separate source repository to the model.
-* The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment.
 * The *connector* will be developed in the same language as the model.
 * The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
 * The *connector* will be developed publicly.
@@ -33,41 +32,6 @@ The instructions also contain links to other documents to support any of the fol
 ## Conventions
 
 {% include conventions.md %}
-
-## Creating your repository
-
-1. In your browser, visit [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
-
-1. Click on "Use this template".
-
-1. Fill out the repository details:
-    * For "Owner", select an appropriate organisation, or your username.
-    * For "Repository name", we recommend "&lt;MODEL&gt;-connector"
-    * Select "Public".
-
-1. Click on "Create repository from template".
-
-1. In your terminal, clone your repository with the following command:
-
-   ```bash
-   $ git clone https://github.com/<USERNAME>/<MODEL>-connector.git
-   ```
-
-1. You will be prompted for a password, which is the [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) created as part of setting up your GitHub account.
-   Enter it now.
-
-1. Change directory into your repository:
-
-   ```bash
-   $ cd <MODEL>-connector
-   ```
-
-1. Obtain a copy of the latest version of the input and output JSON schemas:
-
-   ```bash
-   $ curl https://raw.githubusercontent.com/covid-policy-modelling/schemas/main/schema/input-common.json -o input-schema.json
-   $ curl https://raw.githubusercontent.com/covid-policy-modelling/schemas/main/schema/output-common.json -o output-schema.json
-   ```
 
 ## Creating a connector
 
@@ -144,77 +108,6 @@ This process includes only the high-level steps required - further details may b
    $ git commit -m "..."
    ```
 
-## Publishing your connector
+## Next steps
 
-1. Push your code:
-
-   ```bash
-   $ git push
-   ```
-
-1. In your browser, go to the URL: https://github.com/&lt;OWNER&gt;/&lt;MODEL&gt;/connector.
-   You should see your latest code listed.
-
-1. Click the "Actions" tab.
-   Listed on the page, you should see a line for your latest commit, next to either a yellow circle, a green circle with a tick or a red circle with a cross.
-
-   * If the circle is yellow, your connector is being built, and you should wait until it changes to red or green, which should take a minute or two.
-   * If the circle is red, something has went wrong. Click on your commit, then "publish", and you should be shown an error. Try to figure out what has went wrong, fix the code, then commit and push again.
-   * If the circle is green, your connector has been built successfully.
-
-1. Click the "Code" tab.
-   Under the "Packages" heading, you should now see your connector listed as "&lt;MODEL&gt;-connector/&lt;MODEL&gt;-connector".
-
-1. Click on "Packages" then select the package for your connector. Under "Danger Zone", select "Change visibility", and set the visibility to "Public". Enter the repository name to confirm.
-
-1. Test you can access your package now.
-
-   ```bash
-   $ docker pull ghcr.io/<OWNER>/<MODEL>-connector/<MODEL>-connector
-   ...
-   Using default tag: latest
-   latest: Pulling from <OWNER/<MODEL>-connector/<MODEL>-connector
-   ...
-   Status: Downloaded newer image for ghcr.io/<OWNER>/<MODEL>-connector/<MODEL>-connector:latest
-   ghcr.io/<USERNAME>/<MODEL>-connector/<MODEL>-connector:latest
-   ```
-
-1. Choose an appropriate version number (e.g. v0.0.1), tag your model connector and push the tag.
-
-   ```bash
-   $ git tag v<VERSION>
-   $ git push --tags
-   ```
-
-1. Return to the "Actions" tab, and you should see a line for your tag. Wait again for it to be built successfully.
-
-1. Test you can access the tagged version of your package.
-
-   ```bash
-   $ docker pull ghcr.io/<OWNER>/<MODEL>-connector/<MODEL>-connector:<VERSION>
-   ...
-   ```
-
-## Documenting your connector
-
-1. Edit `meta.yml` to describe what your model/connector supports.
-   This records the metadata used in integration with the `web-ui`.
-
-1. Edit `README.md` to describe your connector for yourself and other developers.
-
-1. Commit and push the changes.
-
-## Deploying your connector
-
-1. Raise a PR against the [web-ui](https://github.com/covid-policy-modelling/web-ui/) repository, copying the content of your `meta.yml` into the `models.yml` file.
-   You can do this by [forking the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) and creating a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) from your fork.
-   Alternatively, you can do this in browser by:
-
-   1. Open [models.yml](https://github.com/covid-policy-modelling/web-ui/blob/main/models.yml).
-   1. Click "Fork this project and edit the file" (marked with a pencil icon).
-   1. Append your changes to the end of the file
-   1. Under "Propose changes", add a meaningful commit message.
-   1. Select "Propose changes".
-
-1. Maintainers of the web-ui repository should respond your PR, and may request further information or changes.
-   Once the PR has been accepted, maintainers of the public covid-policy-modelling COVID-UI environment can deploy an updated version of the web-ui in order to make your connector available to users.
+Follow the [steps for documenting your connector](document.md).
