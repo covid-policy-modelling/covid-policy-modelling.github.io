@@ -3,7 +3,7 @@
 In this tutorial you will build a model connector for the COVID-UI system, using an SIR model developed in Python.
 After completion of the tutorial, you should be comfortable with the general concepts of the COVID-UI system, and able to follow additional documentation on how to add your specific model (which may be in any language, not just Python) to COVID-UI.
 
-## Content
+## Contents
 
 * TOC
 {:toc}
@@ -33,37 +33,20 @@ If you are not comfortable with those topics, we recommend the [GitHub Get Start
 Again, this covers a large number of more advanced aspects than are necessary for the tutorial.
 The main sections that are necessary to follow this tutorial are:
 
-* https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account
-* https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-* https://docs.github.com/en/get-started/quickstart/set-up-git
-* https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
-* https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories
-* https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
+* [Getting started](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account)
+* [Creating a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+* [Set up Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
+* [Create a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+* [About remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories)
+* [Pushing commits to a remote repository](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository)
 
 ## Conventions
 
-Throughout this tutorial, there are commands or instructions which require information specific to you, e.g. your GitHub username.
-These are written in capital letters and surrounded by angle brackets, e.g. `<USERNAME>`.
-Always replace these with the appropriate information (which should be clear from context).
-For example, if your GitHub username was `octocat`, then an instruction to enter the command `git clone https://github.com/<USERNAME>/tutorial-model-connector.git` means that you should enter `git clone https://github.com/octocat/tutorial-model-connector.git`.
+{% include conventions.md %}
 
-Commands to type are usually shown in blocks like this:
+## Steps
 
-```bash
-$ cat file.txt
-This is the contents of the file
-```
-
-The `$` indicates a command that you need to type, but you should not type the `$` character itself.
-Any lines in a block that do not start with a `$` show the expected output of the command, and should not be typed either.
-Blocks may contain more than one command to type, interleaved with output.
-
-Very short commands may be shown inline in a different font, like this: `cat file.txt`.
-
-In both the output of the commands and while showing repeated file content, some content may be omitted.
-This is indicated with an ellipsis: `...`.
-
-## Creating your repository
+### Creating your repository
 
 1. In your browser, visit [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
 
@@ -105,7 +88,7 @@ This is indicated with an ellipsis: `...`.
     $ curl https://covid-policy-modelling.github.io/connector-tutorial/requirements.txt -o requirements.txt
     ```
 
-## Creating a Dockerfile
+### Creating a Dockerfile
 
 1. The first requirement of a model connector is that it must be a Docker image.
    To build the image, you will need to create a `Dockerfile`.
@@ -145,7 +128,7 @@ This is indicated with an ellipsis: `...`.
    ERROR: 2
    ```
 
-## Creating your connector
+### Creating your connector
 
 1. The previous error comes from trying to run the command specified in the Dockerfile with `CMD`, because the `connector.py` doesn't exist yet. Create that now:
 
@@ -187,7 +170,7 @@ This is indicated with an ellipsis: `...`.
    INFO:root:Starting connector
    ```
 
-## Validating the output
+### Validating the output
 
 1. The connector now runs successfully, but it doesn't produce any output.
    An additional command can be used to check the output, and confirm this:
@@ -328,7 +311,7 @@ This is indicated with an ellipsis: `...`.
    ERROR: 1
    ```
 
-## Reading input data
+### Reading input data
 
 1. As expected, another error was produced.
    You might notice that the error message is not exactly the same as before.
@@ -414,7 +397,7 @@ This is indicated with an ellipsis: `...`.
    INFO:root:Simulation successfully completed
    ```
 
-## Carrying out a simulation
+### Carrying out a simulation
 
 1. You've now successfully created a model connector.
    You might have noticed however that the model didn't actually do any simulation.
@@ -455,7 +438,7 @@ This is indicated with an ellipsis: `...`.
    $ cat output/data.json
    ```
 
-## Publishing your connector
+### Publishing your connector
 
 1. In order to publish your connector, you need to push your code to your remote GitHub repository.
    Note that while we use the term publish, the connector is still private and nobody else will be able to see it.
@@ -493,6 +476,10 @@ This is indicated with an ellipsis: `...`.
    Status: Downloaded newer image for ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector:latest
    ghcr.io/<USERNAME>/tutorial-model-connector/tutorial-model-connector:latest
    ```
+
+## Next steps
+
+If you are interested in building a model connector for a real model, please see our [how-to documentation](../connector-howto).
 
 ## Notes
 

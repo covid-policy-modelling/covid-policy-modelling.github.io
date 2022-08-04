@@ -31,7 +31,7 @@ Models which have been used with the tool include:
 ## Where can I learn more?
 
 For policy makers who are interested in learning more about the tool or gaining access to the demonstration server, please contact the [maintainers via GitHub](https://github.com/orgs/covid-policy-modelling/people).
-For modellers interested in integrating their model with the tool, please see our documentation for writing a [model-connector](https://github.com/covid-policy-modelling/model-connector-template).
+For modellers interested in integrating their model with the tool, please see our documentation for writing a [model-connector](connector.md).
 For information on the architecture, or deploying the tool for yourself, see our [architecture documentation](architecture.md).
 
 ## Partners

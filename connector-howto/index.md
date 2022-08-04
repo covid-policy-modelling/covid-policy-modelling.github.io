@@ -3,7 +3,7 @@
 In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
 After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
 
-## Content
+## Contents
 
 * TOC
 {:toc}
@@ -15,5 +15,6 @@ For more information, you should work through (or at least read) the [tutorial o
 
 ## Steps
 
-1. Work through the [initial considerations](considerations.md), which should guide you on what other documentation to follow
-1. Look at [examples](examples.md) if you need further guidance or inspirations
+1. Work through the [initial considerations](considerations.md), which should guide you on what other documentation to follow.
+1. Work through the [main steps to build a connector](build.md).
+1. Look at [examples](examples.md) if you need further guidance or inspirations.

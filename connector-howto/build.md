@@ -3,16 +3,17 @@
 In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
 After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
 
-## Content
+## Contents
 
 * TOC
 {:toc}
 
 ## Assumptions
 
-This repository and these instructions assume the following:
+The main body of these instructions assume the following:
 
-* The *model* is available as a library from a public package repository e.g. PyPI, or CRAN.
+* The *model* is available as a library
+* The *model* is installed from a public package repository e.g. PyPI, or CRAN.
 * The *connector* will be developed in a separate source repository to the model.
 * The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment.
 * The *connector* will be developed in the same language as the model.
@@ -21,6 +22,17 @@ This repository and these instructions assume the following:
 * The *connector* will use the common input and output schema shared with other models.
 * The *connector* will validate all input and ouput.
 * The *connector* does not require any additional data other than that supplied with the model or provided as input.
+
+The instructions also contain links to other documents to support any of the following:
+
+* The *model* is available as a non-interactive script or application
+* The *model* can be installed in a container
+* The *model* can be installed from an external location
+* The *model* can be installed from a source repository
+
+## Conventions
+
+{% include conventions.md %}
 
 ## Creating your repository
 
@@ -63,12 +75,19 @@ Develop your connector by editing the `Dockerfile`, connector code and test inpu
 The below process is best followed iteratively, starting with a basic connector with dummy behaviour, and then making alterations, testing and validating throughout.
 This process includes only the high-level steps required - further details may be found in the `README.md` file in your connector repository.
 
-1. Edit the file `Dockerfile` to install your model and necessary prerequisites, along with your connector code:
+1. If your model is not available as a library, follow this process in conjunction with other relevant documentation
+
+   * [Executable](executable.md)
+   * [Container](container.md)
+   * [Repository](repository.md)
+   * [External](external.md)
+
+1. Edit the file `Dockerfile` to install the model, along with your connector code:
 
    * Set an appropriate base image for your language e.g. [python](https://hub.docker.com/_/python), [r-base](https://hub.docker.com/_/r-base) etc.
      * (Recommended) Pin to a specific version, e.g. `python:3.9` - the level of specificity may vary according to the language's conventions, requirement for reproducibility, frequency of development etc.
-   * Install your model code and dependencies using the usual conventions for your languages, e.g. using `pip` for Python (as shown in the [tutorial](../connector-tutorial/Dockerfile))
-   *  Install a [JSON Schema validator](https://json-schema.org/implementations.html#validators) as well.
+   * Install the model code using the usual conventions for your language, e.g. using `pip` for Python (as shown in the [tutorial](../connector-tutorial/Dockerfile))
+   * Install a [JSON Schema validator](https://json-schema.org/implementations.html#validators) as well.
    * Add the connector code using [COPY](https://docs.docker.com/engine/reference/builder/#copy).
    * Add the schema files using `COPY` as well
    * Set the `CMD` to run your connector code, passing in as parameters:

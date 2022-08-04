@@ -9,7 +9,7 @@ After completion, you should be confident in knowing which other documentation t
 * TOC
 {:toc}
 
-### How can the model be installed and executed?
+### How can the model be executed?
 
 Models can be executed in a variety of ways, and some of these are simpler to integrate with a connector than others.
 If you have influence over the development of the model itself, you may be in a position to change how it is used in order to simplify the connector.
@@ -25,11 +25,7 @@ You must ensure that any model can be run through one or more command-line instr
 This is straight-forward, and places few restrictions on building a connector.
 In particular, the connector can be written in almost any language, and can use whatever is common in that language for calling external applications, e.g. `subprocess` in Python, `child_process` in Node.js etc.
 
-#### As a Docker container with an application
-
-As above, this is straight-forward, and has the added benefit of simplifying the installation of any necessary dependencies for the mode.
-
-#### As a library, e.g. on PyPi or CRAN
+#### As a library
 
 This is also straight-forward, and if the connector is written in the same language as the model then this is usually the simplest approach.
 It is still possible to write the connector in a different language, making use of bindings (e.g. using [ctypes](https://docs.python.org/3/library/ctypes.html?highlight=ctypes#module-ctypes) or [CFFI](https://cffi.readthedocs.io/en/latest/goals.html) in Python), but this is more complex.
@@ -43,6 +39,15 @@ This is the approach supported by the use of the [model-connector-template](http
 For small teams who wish to minimise the number of repositories they use, it is possible to combine the connector code with the model itself.
 This can simplify initial development, but is only appropriate under specific circumstances.
 This can be achieved by copying the relevant files from [model-connector-template](https://github.com/covid-policy-modelling/model-connector-template).
+
+### Where can the model be installed from?
+
+As with execution, there are a number of ways to install a model.
+If you have influence over the development of the model itself, you may be in a position to change how it is used in order to simplify the connector.
+If you are developing a connector for somebody else's model however, you may be unable to do so, and will have to adapt the connector accordingly.
+
+The recommended approaches are to install the model either from a public package repository (e.g. PyPI or CRAN), or through the use of an existing Docker container, if these are available.
+If neither of these are possible, it is also possible to install the model from an external location such as a GitHub release or SourceForge, or from a Git repository.
 
 ### Where will the connector be deployed?
 
@@ -163,3 +168,42 @@ This can improve (although not completely remove) the reliability issues associa
 It also means the connector does not have to updated or redeployed when new data is available.
 Where many models may share the same data source, it can also reduce the overheads by avoiding repeated downloads of identical data.
 It does however require additional effort to develop and maintain a system for populating and refreshing the external data source.
+
+## Next steps
+
+Follow the [main build steps](build.md).
+These are appropriate if:
+
+* Either:
+  * The *model* is available as a library
+  * The *model* is available as a non-interactive script or application
+* Either:
+  * The *model* is installed from a public package repository e.g. PyPI, or CRAN.
+  * The *model* can be installed in a container
+  * The *model* can be installed from an external location
+  * The *model* can be installed from a source repository
+* The *connector* will be developed in a separate source repository to the model.
+* The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment.
+* The *connector* will be developed in the same language as the model.
+* The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
+* The *connector* will be developed publicly.
+* The *connector* will use the common input and output schema shared with other models.
+* The *connector* will validate all input and ouput.
+* The *connector* does not require any additional data other than that supplied with the model or provided as input.
+
+## Other configurations
+
+The following configurations are currently unsupported - they are possible to do but we have not documented them.
+You may still be able to achieve them by amending the [main build instructions](build.md).
+We have listed what sections of the instructions are likely to require alterations:
+
+* How to deploy to a different environment (Deploying)
+* How to develop in a private repository (Repository, Publishing, Deploying)
+* How to use a custom schema (Repository, Creating)
+* How to store data in the container (Creating)
+* How to access data at runtime (Creating)
+* How to access external data (Creating)
+* How to use a shared schema (Repository, Creating)
+* How to develop in the same repository (Repository)
+* How to use a different host (Repository, Publishing, Deploying)
+* How to develop without validation (Creating)
