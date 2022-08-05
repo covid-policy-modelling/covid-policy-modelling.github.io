@@ -21,6 +21,10 @@ The main body of these instructions assume the following:
 * The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
 * The *connector* will be developed publicly.
 
+The instructions also contain additional notes to support any of the following:
+
+* The *connector* will be developed privately.
+
 ## Conventions
 
 {% include conventions.md %}
@@ -46,7 +50,10 @@ The main body of these instructions assume the following:
 1. Click the "Code" tab.
    Under the "Packages" heading, you should now see your connector listed as "&lt;MODEL&gt;-connector/&lt;MODEL&gt;-connector".
 
-1. Click on "Packages" then select the package for your connector. Under "Danger Zone", select "Change visibility", and set the visibility to "Public". Enter the repository name to confirm.
+1. Click on "Packages" then select the package for your connector.
+   Select "Package settings", then under "Danger Zone", select "Change visibility", and set the visibility to "Public".
+   Enter the repository name to confirm.
+   * If your connector will be developed privately, refer to the [notes below](#the-connector-will-be-developed-privately).
 
 1. Test you can access your package now.
 
@@ -79,3 +86,12 @@ The main body of these instructions assume the following:
 ## Next steps
 
 Follow the [steps for deploying your connector](deploy.md).
+
+## Additional steps for alternative approaches
+
+### The connector will be developed privately
+
+*Do not* carry out the step to make your package public.
+Instead you must give read access to the `@covid-policy-modelling-bot` user, either directly or by giving it read access to the repository and selecting to inherit those permissions in the package.
+When later accessing your package, you may first be required to log in to the GitHub Packages Container Registry using `docker login ghcr.io`.
+

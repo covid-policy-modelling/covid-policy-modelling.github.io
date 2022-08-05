@@ -191,6 +191,7 @@ In addition, they contain pointers for how to address the following situations:
 * The *model* can be installed as a container
 * The *model* can be installed from an external location
 * The *model* can be installed from a source repository
+* The *connector* will be developed privately.
 * The *connector* will use a custom schema
 * The *connector* will use a different shared schema
 
@@ -201,7 +202,6 @@ You may still be able to achieve them by amending the [main build instructions](
 We have listed what sections of the instructions are likely to require alterations:
 
 * How to deploy to a different environment (Deploying your connector)
-* How to develop in a private repository (Creating a repository, Publishing your connector, Deploying your connector)
 * How to store data in the container (Creating a connector)
 * How to access data at runtime (Creating a connector)
 * How to access external data (Creating a connector)

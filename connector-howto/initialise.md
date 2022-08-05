@@ -19,6 +19,7 @@ The main body of these instructions assume the following:
 
 The instructions also contain additional notes to support any of the following:
 
+* The *connector* will be developed privately.
 * The *connector* will use a custom schema
 * The *connector* will use a different shared schema
 
@@ -33,9 +34,10 @@ The instructions also contain additional notes to support any of the following:
 1. Click on "Use this template".
 
 1. Fill out the repository details:
-    * For "Owner", select an appropriate organisation, or your username.
-    * For "Repository name", we recommend "&lt;MODEL&gt;-connector"
-    * Select "Public".
+   * For "Owner", select an appropriate organisation, or your username.
+   * For "Repository name", we recommend "&lt;MODEL&gt;-connector".
+   * Select "Public".
+   * If your connector will be developed privately, refer to the [notes below](#the-connector-will-be-developed-privately).
 
 1. Click on "Create repository from template".
 
@@ -70,6 +72,11 @@ The instructions also contain additional notes to support any of the following:
 Follow the [steps for building your connector](build.md).
 
 ## Additional steps for alternative approaches
+
+### The connector will be developed privately
+
+Select "Private" instead of "Public".
+All other settings should remain the same.
 
 ### The connector will use a custom schema
 
