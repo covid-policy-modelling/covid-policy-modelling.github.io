@@ -1,7 +1,7 @@
-# COVID Policy Modelling Model Connector Template
+# COVID Policy Modelling Model Connector How-To: Deploying your connector
 
-In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
-After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
+In this section, you will complete deployment of your connector.
+After completion, your connector will be deployed to a COVID-UI, making it available for policy makers and others to run simulations using it.
 
 ## Contents
 

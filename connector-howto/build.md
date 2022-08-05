@@ -1,7 +1,7 @@
-# COVID Policy Modelling Model Connector Template
+# COVID Policy Modelling Model Connector How-To: Creating a connector
 
-In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
-After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
+In this section, you will create a connector for a model of your choice.
+After completion, you should have a complete connector which is capable of running simulations on your local machine, and which could be integrated with COVID-UI.
 
 ## Contents
 
@@ -16,8 +16,6 @@ The main body of these instructions assume the following:
 * The *model* is installed from a public package repository e.g. PyPI, or CRAN.
 * The *connector* will be developed in a separate source repository to the model.
 * The *connector* will be developed in the same language as the model.
-* The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
-* The *connector* will be developed publicly.
 * The *connector* will use the common input and output schema shared with other models.
 * The *connector* will validate all input and ouput.
 * The *connector* does not require any additional data other than that supplied with the model or provided as input.
@@ -25,7 +23,7 @@ The main body of these instructions assume the following:
 The instructions also contain links to other documents to support any of the following:
 
 * The *model* is available as a non-interactive script or application
-* The *model* can be installed in a container
+* The *model* can be installed as a container
 * The *model* can be installed from an external location
 * The *model* can be installed from a source repository
 
@@ -39,12 +37,12 @@ Develop your connector by editing the `Dockerfile`, connector code and test inpu
 The below process is best followed iteratively, starting with a basic connector with dummy behaviour, and then making alterations, testing and validating throughout.
 This process includes only the high-level steps required - further details may be found in the `README.md` file in your connector repository.
 
-1. If your model is not available as a library, follow this process in conjunction with other relevant documentation
+1. If your model is not available as a library from a public package repository, follow this process in conjunction with other relevant documentation
 
-   * [Executable](executable.md)
-   * [Container](container.md)
-   * [Repository](repository.md)
-   * [External](external.md)
+   * [The model is available as a non-interactive script or application](#the-model-is-available-as-a-non-interactive-script-or-application)
+   * [The model can be installed as a container](#the-model-can-be-installed-as-a-container)
+   * [The model can be installed from an external location](#the-model-can-be-installed-from-an-external-location)
+   * [The model can be installed from a source repository](#the-model-can-be-installed-from-a-source-repository)
 
 1. Edit the file `Dockerfile` to install the model, along with your connector code:
 
@@ -76,6 +74,7 @@ This process includes only the high-level steps required - further details may b
      * For many languages, this is default behaviour.
 
 1. Edit the test data in `test-job.json`.
+   This may be necessary for example if your model does not support the parameters specified in the file.
 
 1. Build your image (this might take some time on first run, but subsequent runs will usually be quicker):
 
@@ -107,6 +106,35 @@ This process includes only the high-level steps required - further details may b
    $ git add ...
    $ git commit -m "..."
    ```
+
+## Additional steps for alternative approaches
+
+### The model is available as a non-interactive script or application
+
+In your connector, use whatever is common in your language for calling external applications, e.g. `subprocess` in Python, `child_process` in Node.js etc.
+Depending on the exact nature of the application, you may also have to read or write the input and output parameters to files on disk.
+If necessary, make sure to check the output and result code for errors.
+
+### The model can be installed as a container
+
+Use the existing model container as the base image.
+You should not usually have to take further steps to install the model or any dependencies.
+
+It's recommended to pin to a specific version - the level of specificity may vary according to the model's development process, requirement for reproducibility, frequency of development etc.
+
+### The model can be installed from an external location
+
+In your `Dockerfile`, obtain a copy of the model with something like `RUN curl ...` or `RUN wget ...` etc.
+Depending on your base image, you may need to install `curl` or `wget` first, e.g. with `RUN apk add curl`, `RUN apt-get install curl` etc.
+You may also need to add other `RUN ...` commands to install any prerequisites of the model.
+
+
+### The model can be installed from a source repository
+
+In your `Dockerfile`, obtain a copy of the model with something like `RUN git clone ...`.
+Depending on your base image, you may need to install `git` first, e.g. with `RUN apk add git`, `RUN apt-get install git` etc.
+If necessary, add other commands of the form `RUN ...` to carry out build steps.
+You may also need to add other `RUN ...` commands to install any prerequisites of the model.
 
 ## Next steps
 

@@ -1,3 +1,8 @@
+# COVID Policy Modelling Model Connector How-To: Publishing your connector
+
+In this section, you will build and publish your connector.
+After completion, your connector will be available for others to use.
+
 # COVID Policy Modelling Model Connector Template
 
 In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.

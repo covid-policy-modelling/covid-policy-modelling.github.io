@@ -188,7 +188,7 @@ These are appropriate if:
 * The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
 * The *connector* will be developed publicly.
 * The *connector* will use the common input and output schema shared with other models.
-* The *connector* will validate all input and ouput.
+* The *connector* will validate all input and output.
 * The *connector* does not require any additional data other than that supplied with the model or provided as input.
 
 ## Other configurations
@@ -204,6 +204,6 @@ We have listed what sections of the instructions are likely to require alteratio
 * How to access data at runtime (Creating)
 * How to access external data (Creating)
 * How to use a shared schema (Repository, Creating)
-* How to develop in the same repository (Repository)
+* How to develop in the same repository (Repository, Creating, Publishing)
 * How to use a different host (Repository, Publishing, Deploying)
 * How to develop without validation (Creating)

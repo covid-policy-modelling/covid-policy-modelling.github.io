@@ -1,7 +1,7 @@
-# COVID Policy Modelling Model Connector Template
+# COVID Policy Modelling Model Connector How-To: Create repository
 
-In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
-After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
+In this section, you will create a repository to begin development.
+After completion, you should have all the initial files needed to carry on with further steps.
 
 ## Contents
 
