@@ -201,10 +201,10 @@ The following configurations are currently unsupported - they are possible to do
 You may still be able to achieve them by amending the [main build instructions](initialise.md).
 We have listed what sections of the instructions are likely to require alterations:
 
-* How to deploy to a different environment (Deploying your connector)
-* How to store data in the container (Creating a connector)
-* How to access data at runtime (Creating a connector)
-* How to access external data (Creating a connector)
-* How to develop in the same repository (Creating a repository, Creating a connector, Publishing your connector)
-* How to use a different host (Creating a repository, Publishing your connector, Deploying your connector)
-* How to develop without validation (Creating a connector)
+* The *connector* will be developed in the same source repository as the model. (Creating a repository, Creating a connector, Publishing your connector)
+* The *connector* will be deployed to a different COVID-UI environment (Deploying your connector)
+* The *connector* will be hosted somewhere other than GitHub (Creating a repository, Publishing your connector, Deploying your connector)
+* The *connector* will not validate input or output (Creating a connector)
+* The *connector* will download data at runtime (Creating a connector)
+* The *connector* will include extra data in the container (Creating a connector)
+* The *connector* will access data stored externally (Creating a connector)

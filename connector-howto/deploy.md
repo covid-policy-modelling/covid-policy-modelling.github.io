@@ -22,6 +22,11 @@ The main body of these instructions assume the following:
 The instructions also contain additional notes to support any of the following:
 
 * The *connector* will use a custom schema
+* The *connector* will be developed privately.
+
+## Conventions
+
+{% include conventions.md %}
 
 ## Deploying your connector
 
@@ -33,6 +38,14 @@ The instructions also contain additional notes to support any of the following:
 
 1. In your local repository, edit the file `models.yml`.
    Copy the contents of your connector's `meta.yml`, appending them to the end of the file.
+
+1. Edit the file `.override-staging/models.yml`.
+   Add lines specifying the latest version of your connector, e.g.
+
+   ```yaml
+   <MODEL>:
+     imageURL: ghcr.io/<OWNER>/<MODEL>-connector/<MODEL>-connector:<VERSION>
+   ```
 
 1. Run the script `script/generate-docs`.
 
