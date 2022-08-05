@@ -20,12 +20,14 @@ The main body of these instructions assume the following:
 * The *connector* will validate all input and ouput.
 * The *connector* does not require any additional data other than that supplied with the model or provided as input.
 
-The instructions also contain links to other documents to support any of the following:
+The instructions also contain additional notes to support any of the following:
 
 * The *model* is available as a non-interactive script or application
 * The *model* can be installed as a container
 * The *model* can be installed from an external location
 * The *model* can be installed from a source repository
+* The *connector* will use a custom schema
+* The *connector* will use a different shared schema
 
 ## Conventions
 
@@ -36,13 +38,6 @@ The instructions also contain links to other documents to support any of the fol
 Develop your connector by editing the `Dockerfile`, connector code and test input, then building, running and validating your connector.
 The below process is best followed iteratively, starting with a basic connector with dummy behaviour, and then making alterations, testing and validating throughout.
 This process includes only the high-level steps required - further details may be found in the `README.md` file in your connector repository.
-
-1. If your model is not available as a library from a public package repository, follow this process in conjunction with other relevant documentation
-
-   * [The model is available as a non-interactive script or application](#the-model-is-available-as-a-non-interactive-script-or-application)
-   * [The model can be installed as a container](#the-model-can-be-installed-as-a-container)
-   * [The model can be installed from an external location](#the-model-can-be-installed-from-an-external-location)
-   * [The model can be installed from a source repository](#the-model-can-be-installed-from-a-source-repository)
 
 1. Edit the file `Dockerfile` to install the model, along with your connector code:
 
@@ -57,6 +52,10 @@ This process includes only the high-level steps required - further details may b
      * output location (`/data/output/output.json`)
      * input schema location (from your `COPY` command)
      * output schema location (from your `COPY` command)
+   * If your model is not available from a public package repository, refer to the notes below:
+      * [The model can be installed as a container](#the-model-can-be-installed-as-a-container)
+      * [The model can be installed from an external location](#the-model-can-be-installed-from-an-external-location)
+      * [The model can be installed from a source repository](#the-model-can-be-installed-from-a-source-repository)
 
 1. Create your connector code, which needs to:
 
@@ -72,6 +71,10 @@ This process includes only the high-level steps required - further details may b
    * Validate the output against the schema file.
    * Exit with a zero status if the simulation succeeded, or a non-zero status otherwise.
      * For many languages, this is default behaviour.
+   * If your model is not available as a library or your connector does not use the common schema, refer to the notes below:
+     * [The model is available as a non-interactive script or application](#the-model-is-available-as-a-non-interactive-script-or-application)
+     * [The connector will use a custom schema](#the-connector-will-use-a-custom-schema)
+     * [The connector will use a different shared schema](#the-connector-will-use-a-different-shared-schema)
 
 1. Edit the test data in `test-job.json`.
    This may be necessary for example if your model does not support the parameters specified in the file.
@@ -107,6 +110,10 @@ This process includes only the high-level steps required - further details may b
    $ git commit -m "..."
    ```
 
+## Next steps
+
+Follow the [steps for documenting your connector](document.md).
+
 ## Additional steps for alternative approaches
 
 ### The model is available as a non-interactive script or application
@@ -136,6 +143,14 @@ Depending on your base image, you may need to install `git` first, e.g. with `RU
 If necessary, add other commands of the form `RUN ...` to carry out build steps.
 You may also need to add other `RUN ...` commands to install any prerequisites of the model.
 
-## Next steps
+### The connector will use a custom schema
 
-Follow the [steps for documenting your connector](document.md).
+In your connector code, you will need to interpret the input and output parameters according to whatever your custom schema expects.
+You may wish to update the [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/) if necessary.
+You will need to edit the `test-job.json` file to match a valid test input for the schema.
+
+### The connector will use a different shared schema
+
+In your connector code, you will need to interpret the input and output parameters according to whatever the shared schema expects.
+There *may* be more information available in the [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/) if the schema author provided it.
+You will need to edit the `test-job.json` file to match a valid test input for the schema.

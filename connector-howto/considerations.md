@@ -174,14 +174,8 @@ It does however require additional effort to develop and maintain a system for p
 Follow the [main build steps](initialise.md).
 These are appropriate if:
 
-* Either:
-  * The *model* is available as a library
-  * The *model* is available as a non-interactive script or application
-* Either:
-  * The *model* is installed from a public package repository e.g. PyPI, or CRAN.
-  * The *model* can be installed in a container
-  * The *model* can be installed from an external location
-  * The *model* can be installed from a source repository
+* The *model* is available as a library
+* The *model* is installed from a public package repository e.g. PyPI, or CRAN.
 * The *connector* will be developed in a separate source repository to the model.
 * The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment.
 * The *connector* will be developed in the same language as the model.
@@ -191,19 +185,26 @@ These are appropriate if:
 * The *connector* will validate all input and output.
 * The *connector* does not require any additional data other than that supplied with the model or provided as input.
 
+In addition, they contain pointers for how to address the following situations:
+
+* The *model* is available as a non-interactive script or application
+* The *model* can be installed as a container
+* The *model* can be installed from an external location
+* The *model* can be installed from a source repository
+* The *connector* will use a custom schema
+* The *connector* will use a different shared schema
+
 ## Other configurations
 
 The following configurations are currently unsupported - they are possible to do but we have not documented them.
 You may still be able to achieve them by amending the [main build instructions](initialise.md).
 We have listed what sections of the instructions are likely to require alterations:
 
-* How to deploy to a different environment (Deploying)
-* How to develop in a private repository (Repository, Publishing, Deploying)
-* How to use a custom schema (Repository, Creating)
-* How to store data in the container (Creating)
-* How to access data at runtime (Creating)
-* How to access external data (Creating)
-* How to use a shared schema (Repository, Creating)
-* How to develop in the same repository (Repository, Creating, Publishing)
-* How to use a different host (Repository, Publishing, Deploying)
-* How to develop without validation (Creating)
+* How to deploy to a different environment (Deploying your connector)
+* How to develop in a private repository (Creating a repository, Publishing your connector, Deploying your connector)
+* How to store data in the container (Creating a connector)
+* How to access data at runtime (Creating a connector)
+* How to access external data (Creating a connector)
+* How to develop in the same repository (Creating a repository, Creating a connector, Publishing your connector)
+* How to use a different host (Creating a repository, Publishing your connector, Deploying your connector)
+* How to develop without validation (Creating a connector)
