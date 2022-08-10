@@ -53,7 +53,7 @@ If neither of these are possible, it is also possible to install the model from 
 
 For your connector to be useful, it needs to be deployed as part of at least one COVID-UI environment.
 This could be the (semi-)public environment managed by the maintainers of the [covid-policy-modelling organisation](https://github.com/covid-policy-modelling), or it could be another private environment, run by your organisation or another.
-If you intend to use an environment not managed by your own organisation, make sure to communicate with them before beginning any development work - they will be best-placed to advise you whether your model is suitable for their environment.
+If you intend to use an environment not managed by your own organisation, make sure to communicate with them before beginning any development work - they will be best placed to advise you whether your model is suitable for their environment.
 
 ### What language will the connector be written in?
 
@@ -104,7 +104,7 @@ Other environments may have different expectations.
 #### Custom
 
 Because these schemas are complex, and may not map to every model, an alternative approach is to define a specific pair of schemas for your model.
-Such connectors cannot be used with COVID-UI web interface at present, but do still allow for simulations to be scheduled through the API.
+Such connectors cannot be used with the COVID-UI web interface at present, but do still allow for simulations to be scheduled through the API.
 This requires some [initial work](https://github.com/covid-policy-modelling/schemas/#adding--documenting-schemas) to define the schemas.
 The maintainers of the relevant COVID-UI environment may have requirements or restrictions on which schemas they require you to support.
 Again, please communicate with them before beginning any development work.
@@ -122,7 +122,7 @@ Please communicate this with the maintainers of the relevant COVID-UI environmen
 
 ### Will you validate the input and output?
 
-While your connector *should* always received data that is valid according to your input schema, we strongly recommend that you always validate the input yourself as the first step of your connector.
+While your connector *should* always receive data that is valid according to your input schema, we strongly recommend that you always validate the input yourself as the first step of your connector.
 This makes debugging any unexpected issues much easier, and is also very helpful when initially developing or updating the connector.
 For similar reasons, we also recommend you validate any output before returning it.
 
@@ -165,7 +165,7 @@ However, it means that the connector must be updated and re-deployed frequently 
 
 A potential half-way approach is to host any required data in an external location, e.g. a database or Git repository.
 This can improve (although not completely remove) the reliability issues associated with runtime downloading, particularly if there are many different original data sources.
-It also means the connector does not have to updated or redeployed when new data is available.
+It also means the connector does not have to be updated or redeployed when new data is available.
 Where many models may share the same data source, it can also reduce the overheads by avoiding repeated downloads of identical data.
 It does however require additional effort to develop and maintain a system for populating and refreshing the external data source.
 
