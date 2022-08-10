@@ -48,7 +48,7 @@ The main sections that are necessary to follow this tutorial are:
 
 ### Creating your repository
 
-1. In your browser, visit [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
+1. In your browser, visit the [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
 
 1. Click on "Use this template".
 
@@ -109,7 +109,7 @@ The main sections that are necessary to follow this tutorial are:
    CMD ["python3", "/app/connector.py", "/data/input/inputFile.json", "/data/output/data.json", "/app/input-schema.json", "/app/output-schema.json"]
    ```
 
-1. It's not necessary to understand the details of this at the moment, but you should remember that all of the lines in this file apart from the final `CMD` define what happens when the image is *built*, and the `CMD` line defines what happens when the image is *run*.
+1. It's not necessary to understand the details of this at the moment, but you should remember that all of the lines in this file apart from the final `CMD` define what happens when the image is *built*, and that the `CMD` line defines what happens when the image is *run*.
 
 1. Build your image now (this might take some time):
 
@@ -130,7 +130,7 @@ The main sections that are necessary to follow this tutorial are:
 
 ### Creating your connector
 
-1. The previous error comes from trying to run the command specified in the Dockerfile with `CMD`, because the `connector.py` doesn't exist yet. Create that now:
+1. The previous error comes from trying to run the command specified in the Dockerfile with `CMD`, although `connector.py` doesn't exist yet. Create that now:
 
    ```bash
    $ touch connector.py
@@ -317,7 +317,7 @@ The main sections that are necessary to follow this tutorial are:
    You might notice that the error message is not exactly the same as before.
    That's because the library used inside the connector (`jsonschema`) is not the same as that used by the `docker-compose run validate` command.
    However, they both do the same thing - validate the output of the simulation against the JSON Schema defined in `output-schema.json`.
-   The important part of the error is the message: "'metadata' is a required property."
+   The important part of the error is the message: `'metadata' is a required property`.
    This tells us that the output was missing a `metadata` key.
 
 1. You can open the `output-schema.json` file to read the definition of the schema.
@@ -449,7 +449,7 @@ The main sections that are necessary to follow this tutorial are:
    $ git push
    ```
 
-1. In your browser, go to the URL: https://github.com/<USERNAME>/tutorial-model-connector.
+1. In your browser, go to the URL: `https://github.com/<USERNAME>/tutorial-model-connector`.
    You should see your latest code listed.
 
 1. Click the "Actions" tab.
