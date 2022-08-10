@@ -1,7 +1,7 @@
 # COVID Policy Modelling Model Connector How-To
 
 In this how-to you will build a model connector for the COVID-UI system, using a model of your choice.
-After completion of the how-to, you should be able to add your specific model connector to a deployment of COVID-UI.
+After completion of the how-to, your model connector will be available in at least one deployment of COVID-UI for yourself or others to start using.
 
 ## Contents
 
@@ -12,6 +12,10 @@ After completion of the how-to, you should be able to add your specific model co
 
 This how-to requires you to have a basic understanding of what a model connector is, and some tools required to build one.
 For more information, you should work through (or at least read) the [tutorial on building a model connector](../connector-tutorial).
+
+## Conventions
+
+{% include conventions.md %}
 
 ## Steps
 

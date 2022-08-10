@@ -1,6 +1,6 @@
 # Model Connectors
 
-A model connector acts as the interface between the web interface and a model.
+A model connector acts as the translator between the web interface and a model.
 It needs to:
 
 * Translate the inputs supplied by the web interface (provided to the connector as a JSON file) to the inputs used by the model.

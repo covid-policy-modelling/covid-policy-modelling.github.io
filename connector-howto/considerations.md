@@ -4,10 +4,12 @@ When building a connector for a specific model, there are a number of considerat
 In this section, you should consider these specific questions, which address the most common considerations.
 After completion, you should be confident in knowing which other documentation to follow.
 
-## Content
+## Contents
 
 * TOC
 {:toc}
+
+## Questions
 
 ### How can the model be executed?
 
@@ -17,8 +19,8 @@ If you are developing a connector for somebody else's model however, you may be 
 
 #### As an interactive script or application
 
-COVID-UI is not suitable for deploying interactive applications, or for workflows that require human intervention, e.g. models that can be run only in `Rstudio`.
-You must ensure that any model can be run through one or more command-line instructions (e.g. `Rscript`) that do not expect a user to provide information interactively.
+COVID-UI is not suitable for deploying interactive applications, or for workflows that require human intervention, e.g. models that can be run only in **Rstudio**.
+You must ensure that any model can be run through one or more command-line instructions (e.g. **Rscript**) that do not expect a user to provide information interactively.
 
 #### As a non-interactive script or application
 
@@ -60,7 +62,7 @@ If you intend to use an environment not managed by your own organisation, make s
 Connectors can in theory be written in any language.
 The principal requirements are that the language can parse and output JSON, and execute the model.
 
-We also recommend that you avoid languages with licensing requirements, e.g. MATLAB or Mathematica, as this complicates the deployment.
+We also recommend that you avoid languages with some licensing requirements, e.g. MATLAB or Mathematica, as this complicates the deployment.
 If you do want to use such a language, please communicate with the maintainers of the relevant COVID-UI environment to discuss how this can be managed.
 
 If your model is only available as a library, it's recommended to write the connector in the same language.
@@ -72,7 +74,7 @@ Existing connectors and documentation most commonly use Python or Node.js, but c
 Development of a connector requires three separate services: source code repository hosting, continuous integration, and container image hosting.
 The recommended service for all three is GitHub (respectively GitHub Repositories, GitHub Actions, and GitHub Packages Container Registry).
 
-You can use an alternative service to replace any of these, but there is no further documentation on doing so.
+You can use an alternative service to replace any of these, but there is currently no documentation on doing so.
 The GitHub Actions workflows included in the [model-connector-template](https://github.com/covid-policy-modelling/model-connector-template) can act as a guide for the necessary steps.
 
 If using an alternative container registry, you should communicate this with the maintainers of the relevant COVID-UI environment, as it may require some minor changes to the relevant control-plane for authentication.
@@ -109,10 +111,12 @@ This requires some [initial work](https://github.com/covid-policy-modelling/sche
 The maintainers of the relevant COVID-UI environment may have requirements or restrictions on which schemas they require you to support.
 Again, please communicate with them before beginning any development work.
 
+This approach even extends to connector for models that are not related to COVID-19 at all, but which would still like to benefit from a web-accessible API allowing users to run simulations.
+
 #### Shared
 
-A less-common approach would be to support an existing pair of schemas other than the `CommonModelInput` and `CommonModelOutput`.
-The steps for this are mostly similar to using the `CommonModelInput` and `CommonModelOutput`.
+A less-common approach would be to support an existing pair of schemas other than the **CommonModelInput** and **CommonModelOutput**.
+The steps for this are mostly similar to using the **CommonModelInput** and **CommonModelOutput**.
 
 #### Multiple
 
@@ -138,7 +142,7 @@ Other environments may have different expectations.
 
 #### Supplied in input
 
-When using the `CommonModelInput`, some summary data about total case and death data in the region is supplied, which can be used by the model.
+When using the **CommonModelInput** schema, some summary data about total case and death data in the region is supplied, which can be used by the model.
 If you have a use case which would benefit from receiving daily case and death data as part of the input, please discuss that with the maintainers of the [covid-policy-modelling organisation](https://github.com/covid-policy-modelling).
 It is unlikely that any other data could be handled in this way however.
 
@@ -171,19 +175,19 @@ It does however require additional effort to develop and maintain a system for p
 
 ## Next steps
 
-Follow the [main build steps](initialise.md).
-These are appropriate if:
+Follow the main build steps, starting by [creating a repository](initialise.md).
+These steps are appropriate if:
 
 * The *model* is available as a library
-* The *model* is installed from a public package repository e.g. PyPI, or CRAN.
-* The *connector* will be developed in a separate source repository to the model.
-* The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment.
-* The *connector* will be developed in the same language as the model.
+* The *model* is installed from a public package repository e.g. PyPI, or CRAN
+* The *connector* will be developed in a separate source repository to the model
+* The *connector* will be deployed to the public covid-policy-modelling COVID-UI environment
+* The *connector* will be developed in the same language as the model
 * The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
-* The *connector* will be developed publicly.
-* The *connector* will use the common input and output schema shared with other models.
-* The *connector* will validate all input and output.
-* The *connector* does not require any additional data other than that supplied with the model or provided as input.
+* The *connector* will be developed publicly
+* The *connector* will use the common input and output schema shared with other models
+* The *connector* will validate all input and output
+* The *connector* does not require any additional data other than that supplied with the model or provided as input
 
 In addition, they contain pointers for how to address the following situations:
 
@@ -191,7 +195,7 @@ In addition, they contain pointers for how to address the following situations:
 * The *model* can be installed as a container
 * The *model* can be installed from an external location
 * The *model* can be installed from a source repository
-* The *connector* will be developed privately.
+* The *connector* will be developed privately
 * The *connector* will use a custom schema
 * The *connector* will use a different shared schema
 
@@ -201,7 +205,7 @@ The following configurations are currently unsupported - they are possible to do
 You may still be able to achieve them by amending the [main build instructions](initialise.md).
 We have listed what sections of the instructions are likely to require alterations:
 
-* The *connector* will be developed in the same source repository as the model. (Creating a repository, Creating a connector, Publishing your connector)
+* The *connector* will be developed in the same source repository as the model (Creating a repository, Creating a connector, Publishing your connector)
 * The *connector* will be deployed to a different COVID-UI environment (Deploying your connector)
 * The *connector* will be hosted somewhere other than GitHub (Creating a repository, Publishing your connector, Deploying your connector)
 * The *connector* will not validate input or output (Creating a connector)

@@ -25,10 +25,6 @@ The instructions also contain additional notes to support any of the following:
 
 * The *connector* will be developed privately.
 
-## Conventions
-
-{% include conventions.md %}
-
 ## Publishing your connector
 
 1. Push your code:
@@ -37,7 +33,7 @@ The instructions also contain additional notes to support any of the following:
    $ git push
    ```
 
-1. In your browser, go to the URL: https://github.com/&lt;OWNER&gt;/&lt;MODEL&gt;/connector.
+1. In your browser, go to the URL: **https://github.com/&lt;OWNER&gt;/&lt;MODEL&gt;/connector**.
    You should see your latest code listed.
 
 1. Click the "Actions" tab.
@@ -92,6 +88,6 @@ Follow the [steps for deploying your connector](deploy.md).
 ### The connector will be developed privately
 
 *Do not* carry out the step to make your package public.
-Instead you must give read access to the `@covid-policy-modelling-bot` user, either directly or by giving it read access to the repository and selecting to inherit those permissions in the package.
+Instead you must give read access to the **@covid-policy-modelling-bot** user, either directly or by giving it read access to the repository and selecting to inherit those permissions in the package.
 When later accessing your package, you may first be required to log in to the GitHub Packages Container Registry using `docker login ghcr.io`.
 

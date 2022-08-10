@@ -91,9 +91,9 @@ The main sections that are necessary to follow this tutorial are:
 ### Creating a Dockerfile
 
 1. The first requirement of a model connector is that it must be a Docker image.
-   To build the image, you will need to create a `Dockerfile`.
+   To build the image, you will need to create a file named **Dockerfile**.
    A sample one is included in the template.
-   Using your text editor, edit the file `Dockerfile` to replace the contents with the following:
+   Using your text editor, edit the file **Dockerfile** to replace the contents with the following:
 
    ```Dockerfile
    FROM python:3.9.12-slim-buster
@@ -130,13 +130,13 @@ The main sections that are necessary to follow this tutorial are:
 
 ### Creating your connector
 
-1. The previous error comes from trying to run the command specified in the Dockerfile with `CMD`, although `connector.py` doesn't exist yet. Create that now:
+1. The previous error comes from trying to run the command specified in the **Dockerfile** with `CMD`, although **connector.py** doesn't exist yet. Create that now:
 
    ```bash
    $ touch connector.py
    ```
 
-1. Using your text editor, edit the file `connector.py` to contain the following:
+   1. Using your text editor, edit the file **connector.py** to contain the following:
 
    ```python
    #! /usr/bin/env python3
@@ -182,7 +182,7 @@ The main sections that are necessary to follow this tutorial are:
    ERROR: 2
    ```
 
-1. Using your text editor, edit the file `connector.py` again to add the following:
+1. Using your text editor, edit the file **connector.py** again to add the following:
 
    ```python
    #! /usr/bin/env python3
@@ -243,7 +243,7 @@ The main sections that are necessary to follow this tutorial are:
 1. This time, the connector produced output, but the output was not valid, and the validator produced an error message.
    You may find the error difficult to understand for now, but there will be more explanation on how to fix it later.
    First though, to make things simpler, you can remove the need to run a separate validation step by adding the validation into the connector itself.
-   Using your text editor, edit the file `connector.py` again:
+   Using your text editor, edit the file **connector.py** again:
 
    ```python
    #! /usr/bin/env python3
@@ -315,12 +315,12 @@ The main sections that are necessary to follow this tutorial are:
 
 1. As expected, another error was produced.
    You might notice that the error message is not exactly the same as before.
-   That's because the library used inside the connector (`jsonschema`) is not the same as that used by the `docker-compose run validate` command.
-   However, they both do the same thing - validate the output of the simulation against the JSON Schema defined in `output-schema.json`.
+   That's because the library used inside the connector (**jsonschema**) is not the same as that used by the `docker-compose run validate` command.
+   However, they both do the same thing - validate the output of the simulation against the JSON Schema defined in **output-schema.json**.
    The important part of the error is the message: `'metadata' is a required property`.
    This tells us that the output was missing a `metadata` key.
 
-1. You can open the `output-schema.json` file to read the definition of the schema.
+1. You can open the **output-schema.json** file to read the definition of the schema.
    JSON Schema can be difficult to understand however.
    You may find it easier to examine the [generated documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/output-minimal.md#minimal-model-output) or the [TypeScript source](https://github.com/covid-policy-modelling/schemas/blob/main/src/output-minimal.ts).
 
@@ -328,7 +328,7 @@ The main sections that are necessary to follow this tutorial are:
    The `metadata` key needs to contain the input that was used for the simulation, so the input needs to be read in.
    Additionally, it's best to check the input itself is valid, according to the input schema.
 
-   Using your text editor, edit the file `connector.py` again:
+   Using your text editor, edit the file **connector.py** again:
 
    ```python
    #! /usr/bin/env python3
@@ -378,9 +378,9 @@ The main sections that are necessary to follow this tutorial are:
    ...
    ```
 
-1. This time, you should receive an error because the input is not valid according to `input-schema.json`.
-   The test input can be found in `test-job.json`.
-   Using your text editor, edit the file `test-job.json` to replace the contents with the following:
+1. This time, you should receive an error because the input is not valid according to **input-schema.json**.
+   The test input can be found in **test-job.json**.
+   Using your text editor, edit the file **test-job.json** to replace the contents with the following:
 
    ```json
    {"p": [0.25, 0.25], "u0": [0.99, 0.01, 0.0], "tspan": [0.0, 10000.0]}
@@ -401,7 +401,7 @@ The main sections that are necessary to follow this tutorial are:
 
 1. You've now successfully created a model connector.
    You might have noticed however that the model didn't actually do any simulation.
-   Using your text editor, edit the file `connector.py` to change the following:
+   Using your text editor, edit the file **connector.py** to change the following:
 
    ```python
    #! /usr/bin/env python3
@@ -440,8 +440,10 @@ The main sections that are necessary to follow this tutorial are:
 
 ### Publishing your connector
 
+1. Review your completed **connector.py** file and ensure it matches the [expected final connector](connector.py).
+
 1. In order to publish your connector, you need to push your code to your remote GitHub repository.
-   Note that while we use the term publish, the connector is still private and nobody else will be able to see it.
+   Note that while we use the term publish, the connector is still private by default and nobody except you will be able to access it.
 
    ```bash
    $ git add .
@@ -449,7 +451,7 @@ The main sections that are necessary to follow this tutorial are:
    $ git push
    ```
 
-1. In your browser, go to the URL: `https://github.com/<USERNAME>/tutorial-model-connector`.
+1. In your browser, go to the URL: **https://github.com/&lt;USERNAME&gt;/tutorial-model-connector**.
    You should see your latest code listed.
 
 1. Click the "Actions" tab.

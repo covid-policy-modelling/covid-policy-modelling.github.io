@@ -12,24 +12,20 @@ After completion, you should have all the initial files needed to carry on with 
 
 The main body of these instructions assume the following:
 
-* The *connector* will be developed in a separate source repository to the model.
+* The *connector* will be developed in a separate source repository to the model
 * The *connector* will be hosted on GitHub, and use GitHub Actions and GitHub Packages Container Registry
-* The *connector* will be developed publicly.
-* The *connector* will use the common input and output schema shared with other models.
+* The *connector* will be developed publicly
+* The *connector* will use the common input and output schema shared with other models
 
 The instructions also contain additional notes to support any of the following:
 
-* The *connector* will be developed privately.
+* The *connector* will be developed privately
 * The *connector* will use a custom schema
 * The *connector* will use a different shared schema
 
-## Conventions
-
-{% include conventions.md %}
-
 ## Creating your repository
 
-1. In your browser, visit [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
+1. In your browser, visit the [model-connector-template repository](https://github.com/covid-policy-modelling/model-connector-template).
 
 1. Click on "Use this template".
 

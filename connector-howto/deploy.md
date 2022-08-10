@@ -24,10 +24,6 @@ The instructions also contain additional notes to support any of the following:
 * The *connector* will use a custom schema
 * The *connector* will be developed privately.
 
-## Conventions
-
-{% include conventions.md %}
-
 ## Deploying your connector
 
 1. If your connector uses a common schema, refer to the [notes below](#the-connector-will-use-a-custom-schema).
@@ -36,10 +32,10 @@ The instructions also contain additional notes to support any of the following:
 
 1. Clone your forked repository to your machine (again, if you have not already done so).
 
-1. In your local repository, edit the file `models.yml`.
-   Copy the contents of your connector's `meta.yml`, appending them to the end of the file.
+1. In your local repository, edit the file **models.yml**.
+   Copy the contents of your connector's **meta.yml**, appending them to the end of the file.
 
-1. Edit the file `.override-staging/models.yml`.
+1. Edit the file **.override-staging/models.yml**.
    Add lines specifying the latest version of your connector, e.g.
 
    ```yaml
@@ -49,7 +45,7 @@ The instructions also contain additional notes to support any of the following:
 
 1. Run the script `script/generate-docs`.
 
-1. Run `git diff`, and you should expect to see changes to `public/openapi.json` to reflect your new model.
+1. Run `git diff`, and you should expect to see changes to **public/openapi.json** to reflect your new model.
 
 1. Run `git commit` and `git push` to push your changes back to your GitHub repository.
 
@@ -69,6 +65,6 @@ Before raising your PR, you must first publish your schema by submitting a PR wi
 After that has been completed, you can then prepare your web-ui changes.
 In addition to the changes listed above, you will also need to:
 
-  * Install the latest version of the `@covid-policy-modelling/api` package in `package.json`.
-  * Add references to your schema in `lib/models.ts`.
-  * Add references to your schema in `script/generate-docs`.
+  * Install the latest version of the **@covid-policy-modelling/api** package in **package.json**.
+  * Add references to your schema in **lib/models.ts**.
+  * Add references to your schema in **script/generate-docs**.

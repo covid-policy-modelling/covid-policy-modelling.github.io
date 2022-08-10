@@ -13,12 +13,12 @@ After completion, you should have a complete connector which is capable of runni
 The main body of these instructions assume the following:
 
 * The *model* is available as a library
-* The *model* is installed from a public package repository e.g. PyPI, or CRAN.
-* The *connector* will be developed in a separate source repository to the model.
-* The *connector* will be developed in the same language as the model.
-* The *connector* will use the common input and output schema shared with other models.
-* The *connector* will validate all input and ouput.
-* The *connector* does not require any additional data other than that supplied with the model or provided as input.
+* The *model* is installed from a public package repository e.g. PyPI, or CRAN
+* The *connector* will be developed in a separate source repository to the model
+* The *connector* will be developed in the same language as the model
+* The *connector* will use the common input and output schema shared with other models
+* The *connector* will validate all input and ouput
+* The *connector* does not require any additional data other than that supplied with the model or provided as input
 
 The instructions also contain additional notes to support any of the following:
 
@@ -29,27 +29,23 @@ The instructions also contain additional notes to support any of the following:
 * The *connector* will use a custom schema
 * The *connector* will use a different shared schema
 
-## Conventions
-
-{% include conventions.md %}
-
 ## Creating a connector
 
-Develop your connector by editing the `Dockerfile`, connector code and test input, then building, running and validating your connector.
+Develop your connector by editing the **Dockerfile**, connector code and test input, then building, running and validating your connector.
 The below process is best followed iteratively, starting with a basic connector with dummy behaviour, and then making alterations, testing and validating throughout.
-This process includes only the high-level steps required - further details may be found in the `README.md` file in your connector repository.
+This process includes only the high-level steps required - further details may be found in the **README.md** file in your connector repository.
 
-1. Edit the file `Dockerfile` to install the model, along with your connector code:
+1. Edit the file **Dockerfile** to install the model, along with your connector code:
 
    * Set an appropriate base image for your language e.g. [python](https://hub.docker.com/_/python), [r-base](https://hub.docker.com/_/r-base) etc.
      * (Recommended) Pin to a specific version, e.g. `python:3.9` - the level of specificity may vary according to the language's conventions, requirement for reproducibility, frequency of development etc.
-   * Install the model code using the usual conventions for your language, e.g. using `pip` for Python (as shown in the [tutorial](../connector-tutorial/Dockerfile))
+   * Install the model code using the usual conventions for your language, e.g. using `RUN pip` for Python (as shown in the [tutorial](../connector-tutorial/Dockerfile))
    * Install a [JSON Schema validator](https://json-schema.org/implementations.html#validators) as well.
    * Add the connector code using [COPY](https://docs.docker.com/engine/reference/builder/#copy).
    * Add the schema files using `COPY` as well
    * Set the `CMD` to run your connector code, passing in as parameters:
-     * input location (`/data/input/inputFile.json`)
-     * output location (`/data/output/output.json`)
+     * input location (**/data/input/inputFile.json**)
+     * output location (**/data/output/output.json**)
      * input schema location (from your `COPY` command)
      * output schema location (from your `COPY` command)
    * If your model is not available from a public package repository, refer to the notes below:
@@ -63,11 +59,15 @@ This process includes only the high-level steps required - further details may b
    * Validate the input against the schema file.
    * Run a simulation using the model, interpreting the input parameters appropriately as suitable for the model.
      * You must check the `region` and `subregion` parameters, and either produce results pertaining to that subregion or exit with an error if the subregion is not supported.
-     * You should support as many of the `inteventionPeriod` parameters as is appropriate for the model, but can ignore any (or all) of them if necessary.
+     * You should support as many of the `interventionPeriod` parameters as is appropriate for the model, but can ignore any (or all) of them if necessary.
      * For more information on the format of the file, you can refer to an [annotated example](https://github.com/covid-policy-modelling/schemas/blob/main/docs/input-common-annotated.json) or [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/input-common.md)
    * Convert the output of the simulation into an object matching the output schema.
      * All `metric` keys are required. For any metrics that the model does not support, you should return an array of appropriate length, consisting of `0` values.
      * For more information on the format of the file, you can refer to [annotated example](https://github.com/covid-policy-modelling/schemas/blob/main/docs/output-common-annotated.json) or [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/output-common.md).
+   * Include the input parameters as the `metadata` key of the output.
+   * Include [metadata about the model and connector](https://github.com/covid-policy-modelling/schemas/blob/main/docs/output-common.md#reference-modeldescription) as the `model` key of the output.
+     * The sample **Dockerfile** provides a `CONNECTOR_VERSION` environment variable, which can be used as the value for `connectorVersion`, e.g. in Python, using `os.getenv("CONNECTOR_VERSION")`.
+     * For `modelVersion`, use a value meaningful to the model in use. For example, Covasim provides a `covasim.__version__` attribute.
    * Validate the output against the schema file.
    * Exit with a zero status if the simulation succeeded, or a non-zero status otherwise.
      * For many languages, this is default behaviour.
@@ -76,7 +76,7 @@ This process includes only the high-level steps required - further details may b
      * [The connector will use a custom schema](#the-connector-will-use-a-custom-schema)
      * [The connector will use a different shared schema](#the-connector-will-use-a-different-shared-schema)
 
-1. Edit the test data in `test-job.json`.
+1. Edit the test data in **test-job.json**.
    This may be necessary for example if your model does not support the parameters specified in the file.
 
 1. Build your image (this might take some time on first run, but subsequent runs will usually be quicker):
@@ -131,15 +131,15 @@ It's recommended to pin to a specific version - the level of specificity may var
 
 ### The model can be installed from an external location
 
-In your `Dockerfile`, obtain a copy of the model with something like `RUN curl ...` or `RUN wget ...` etc.
-Depending on your base image, you may need to install `curl` or `wget` first, e.g. with `RUN apk add curl`, `RUN apt-get install curl` etc.
+In your **Dockerfile**, obtain a copy of the model with something like `RUN curl ...` or `RUN wget ...` etc.
+Depending on your base image, you may need to install **curl** or **wget** first, e.g. with `RUN apk add curl`, `RUN apt-get install curl` etc.
 You may also need to add other `RUN ...` commands to install any prerequisites of the model.
 
 
 ### The model can be installed from a source repository
 
-In your `Dockerfile`, obtain a copy of the model with something like `RUN git clone ...`.
-Depending on your base image, you may need to install `git` first, e.g. with `RUN apk add git`, `RUN apt-get install git` etc.
+In your **Dockerfile**, obtain a copy of the model with something like `RUN git clone ...`.
+Depending on your base image, you may need to install **git** first, e.g. with `RUN apk add git`, `RUN apt-get install git` etc.
 If necessary, add other commands of the form `RUN ...` to carry out build steps.
 You may also need to add other `RUN ...` commands to install any prerequisites of the model.
 
@@ -147,10 +147,10 @@ You may also need to add other `RUN ...` commands to install any prerequisites o
 
 In your connector code, you will need to interpret the input and output parameters according to whatever your custom schema expects.
 You may wish to update the [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/) if necessary.
-You will need to edit the `test-job.json` file to match a valid test input for the schema.
+You will need to edit the **test-job.json** file to match a valid test input for the schema.
 
 ### The connector will use a different shared schema
 
 In your connector code, you will need to interpret the input and output parameters according to whatever the shared schema expects.
 There *may* be more information available in the [schema documentation](https://github.com/covid-policy-modelling/schemas/blob/main/docs/) if the schema author provided it.
-You will need to edit the `test-job.json` file to match a valid test input for the schema.
+You will need to edit the **test-job.json** file to match a valid test input for the schema.
